@@ -18,8 +18,8 @@ with open(csv_file_path, mode='r', newline='') as file:
 
     cnt = 0
     for row in csv_reader:
-        bruh = '\"' + (str)(cnt) + '\"'
         cnt += 1
+        bruh = '\"' + (str)(cnt) + '\"'
         print('\t' + bruh + ': {', file = out_file)
         print('\t\t\"courseNumber\": \"' + row['COURSE NUMBER'] + '\",', file = out_file)
         print('\t\t\"courseName\": \"' + row['COURSE NAME'] + '\",', file = out_file)

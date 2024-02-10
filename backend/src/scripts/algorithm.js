@@ -1,39 +1,125 @@
-var Professor = /** @class */ (function () {
-    function Professor(firstName, lastName, rating) {
+import fs from "fs"
+import { Module } from "module";
+
+export class Professor {
+    constructor(firstName, lastName, rating) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.rating = rating;
     }
-    return Professor;
-}());
+
+    output() {
+        console.log("Professor Name: " + this.fname + this.lname + '\n')
+        console.log("Rating: " + this.rating)
+    }
+}
+
+export function findProfessor(professor) {
+    // Input: one string
+    let pos = professor.split(' ')
+    let fname = pos[0]
+    let finitial = fname[0]
+    let lname = pos[1]
+    for (let i = 2 ; i < pos.length ; i++) {
+        lname += ' ' + pos[i]
+    }
+    
+    let finitiallname = finitial + ' ' + lname
+    fs.readFile("./src/ugaProfessors.json", "utf8", (err, data) =>
+    {
+        if (err) {
+            console.error(err);
+        }
+
+        let obj = JSON.parse(data);
+        // console.log(obj)
+
+        if(obj[finitiallname] !== undefined) {
+            // console.log(obj[finitiallname])
+            let curObj = obj[finitiallname]
+            return new Professor(curObj.firstName, curObj.lastName, curObj.avgRating)
+        }
+    })
+
+}
+
+export function getClass(crn) {
+    let finalResult = [];
+    fs.readFile("./src/courses.json", "utf8", (err, data) =>
+    {
+        if (err) {
+            console.error(err);
+        }
+
+        let obj = JSON.parse(data);
+        // console.log(obj)
+
+        let objList = Object.values(obj);
+
+        const result = objList.filter((c) => crn == c.crn)
+
+        
+        // console.log(result)
+
+        finalResult = result;
+        //type array
+    })
+    return finalResult;
+}
+
 // Define the class structure
-var Class = /** @class */ (function () {
-    function Class(courseNumber, courseName, professor, crn, timeFrame, day, location) {
-        this.courseNumber = courseNumber;
-        this.courseName = courseName;
-        this.professor = professor;
+export class Class {
+    constructor(crn) {
+        let result = getClass(crn)
+        console.log(typeof(result))
+        this.courseNumber = result[0].courseNumber;
+        this.courseName = result[0].courseName;
         this.crn = crn;
+        this.professor = findProfessor(result[0].instructor);
         this.startTime = [0, 0, 0, 0, 0];
         this.endTime = [0, 0, 0, 0, 0];
-        for (var i = 0; i < day.length; i++) {
-            var id = 0; // M
-            if (day == 'M')
-                id = 0;
-            else if (day == 'T')
-                id = 1;
-            else if (day == 'W')
-                id = 2;
-            else if (day == 'R')
-                id = 3;
-            else if (day == 'F')
-                id = 4;
-            this.startTime[id] = parseInt(timeFrame.substring(0, 2)) * 60 + parseInt(timeFrame.substring(3, 4)); // vector<int>[5]: M, T, W, R, F
-            this.endTime[id] = parseInt(timeFrame.substring(5, 7)) * 60 + parseInt(timeFrame.substring(7, 9)); // vector<int>[5]: M, T, W, R, F
+        this.location = ['', '', '', '', '']; // string
+        this.rooms = [0, 0, 0, 0, 0];
+        this.seats = result[0].seatsAvailable;
+        for (let i = 0 ; i < result.length ; i++) {
+            for (let j = 0 ; j < result[i].days.length ; j++) {
+                let id = 0;
+                if(result[i].days[j] == 'T') {
+                    id = 1;
+                }
+                else if(result[i].days[j] == 'W') {
+                    id = 2;
+                }
+                else if(result[i].days[j] == 'R') {
+                    id = 3;
+                }
+                else if(result[i].days[j] == 'F') {
+                    id = 4;
+                }
+                let bruh = result[i].time.split('-')
+                this.startTime[id] = parseInt(bruh[0].substring(0, 2)) * 60 + parseInt(bruh[0].substring(2, 4));
+                this.endTime[id] = parseInt(bruh[1].substring(0, 2) * 60 + parseInt(bruh[1].substring(2, 4)));
+                this.location[id] = result[i].building;
+                this.rooms[id] = result[i].room
+            }
         }
-        this.location = location; // string
     }
-    return Class;
-}());
+    output() {
+        console.log("Course Number: " + this.courseNumber + '\n');
+        console.log("Course Name: " + this.courseName + '\n');
+        console.log("Course CRN: " + this.crn + '\n');
+        console.log("Course Professor: ");
+        this.professor.output();
+        console.log("Course Time:\n");
+        for(let i = 0 ; i < 5 ; i++) {
+            console.log(this.startTime[i] + " - " + this.endTime[i] + '\n');
+        }
+        console.log("Course Location:\n");
+        for(let i = 0 ; i < 5 ; i++) {
+            console.log(this.location[i] + " " + this.room[i] + '\n');
+        }
+    }
+}
 // Define the Schedule structure
 var Schedule = /** @class */ (function () {
     function Schedule(classes) {
@@ -101,34 +187,3 @@ function makeSchedule(i) {
     }
 }
 
-
-function readFile() {
-    let fs = require('fs');
-    let realData = "";
-    fs.readFileSync('src/courses.csv', 'utf8', function (err, data) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        // Process the CSV data
-        console.log(typeof(data));
-        console.log(data.length)
-        realData = data;
-    });
-    console.log(realData.length)
-    return realData;
-}
-
-function parseCSVData(csvData) {
-    let csvData = readFile()
-    console.log(typeof(csvData))
-    if (!csvData) {
-        console.log("No data.")
-        return [];
-    }
-    return csvData.split('\n').map(row => row.split(','));
-}
-// 
-module.exports = {parseCSVData};
-// export {readFile};
-// export default readFile

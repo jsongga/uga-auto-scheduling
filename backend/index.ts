@@ -1,12 +1,12 @@
 /* —— Setup Express —— */
 import express from "express";
 import fs from "fs";
+import { findProfessor, getClass, Professor, Class } from "./src/scripts/algorithm.js";
 const app = express();
 const port = 8080;
 
 import { routes } from "./src/routes/index.ts";
 import fetchWalkingDistance from "./src/scripts/fetchWalkingDistance.js";
-import {parseCSVData} from "./src/scripts/algorithm.js";
 
 // app.get("/", (req, res) => {
 //   res.send("Hello World!");
@@ -39,7 +39,8 @@ app.use("/", routes);
 // });
 
 
-
-
-parseCSVData()
-// // backend\src\scripts\algorithm.js
+let x = getClass(26626);
+console.log(x)
+//let x = new Class(26626);
+//x.output()
+// // backend\src\scripts\algorithm.j/s
