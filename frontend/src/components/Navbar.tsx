@@ -17,12 +17,12 @@ export default function Navbar() {
           </StyledAppName>
         </Stack>
         <Stack direction={"row"} gap={3}>
-          <Button variant={"plain"} size={"sm"} onClick={goToSchedule}>
-            Schedule
-          </Button>
-          <Button variant={"plain"} onClick={goToLogin}>
-            Login
-          </Button>
+          {/*  <NavButtons variant={"plain"} onClick={goToSchedule}>*/}
+          {/*    Schedule*/}
+          {/*  </NavButtons>*/}
+          {/*  <NavButtons variant={"plain"} onClick={goToLogin}>*/}
+          {/*    Login*/}
+          {/*  </NavButtons>*/}
           <Avatar alt={"User"} src={""} />
         </Stack>
       </Stack>
@@ -33,6 +33,10 @@ export default function Navbar() {
 const NavContainer = styled(Box)`
   padding: 1rem;
   background-color: #f5f5f5;
+`;
+
+const NavButtons = styled(Button)`
+  color: #8d91ff;
 `;
 
 const StyledAppName = styled(Typography)`
