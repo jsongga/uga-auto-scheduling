@@ -4,14 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="" />
+    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Initial Project Setup">
+      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/scripts/algorithm.ts" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/.gitignore" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/README.md" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/bun.lockb" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.html" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.ts" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/package-lock.json" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/package.json" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/public/vite.svg" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/counter.ts" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/main.ts" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/style.css" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/typescript.svg" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/vite-env.d.ts" beforeDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/tsconfig.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="160" />
+    <option name="totalTimeSeconds" value="1109" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/WebstormProjects/uga-auto-scheduling" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -20,6 +40,7 @@
   "associatedIndex": 3
 }]]></component>
   <component name="ProjectId" id="2c9VSkj8jdVi8u2Jsqq9jJjEYrK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -29,15 +50,35 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
     "settings.editor.selected.configurable": "MTConfigurable",
+    "ts.external.directory.path": "/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="/$PROJECT_DIR$/backend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -53,11 +94,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707523782440</updated>
-      <workItem from="1707523783662" duration="365000" />
+      <workItem from="1707523783662" duration="1314000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial Project Setup">
+      <option name="closed" value="true" />
+      <created>1707524323532</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707524323532</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Project Setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Project Setup" />
   </component>
 </project>
