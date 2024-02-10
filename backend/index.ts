@@ -39,8 +39,6 @@ app.use("/", routes);
 // });
 
 
-let x = getClass(26626);
-console.log(x)
-//let x = new Class(26626);
-//x.output()
+let x = new Class(26626);
+x.output()
 // // backend\src\scripts\algorithm.j/s
