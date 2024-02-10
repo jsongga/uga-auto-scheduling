@@ -4,26 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Initial">
-      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/main.ts" afterDir="false" />
-      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/Navbar.tsx" afterDir="false" />
-      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/Landing.tsx" afterDir="false" />
-      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/Login.tsx" afterDir="false" />
-      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/NotFound.tsx" afterDir="false" />
-      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/RootTemplate.tsx" afterDir="false" />
+    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Updated tsconfig.json for frontend&#10;Added landing, login, and signup pages">
+      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" afterDir="false" />
+      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/index.ts" afterDir="false" />
+      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/CardWrapper.tsx" afterDir="false" />
+      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/Reorder.tsx" afterDir="false" />
+      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/SingleCard.tsx" afterDir="false" />
       <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" afterDir="false" />
-      <change afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/Signup.tsx" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/bun.lockb" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/bun.lockb" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.ts" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/package-lock.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/package-lock.json" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/package.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/package.json" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/Course Schedule - Spring 2024_Page 1_Table.csv" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/courses.csv" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/main.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/main.ts" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/tsconfig.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/tsconfig.json" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/bun.lockb" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/bun.lockb" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package-lock.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package.json" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/App.css" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/App.css" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/index.css" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/index.css" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/main.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/main.tsx" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/vite-env.d.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/vite-env.d.ts" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/tsconfig.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +31,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="9531" />
+    <option name="totalTimeSeconds" value="12261" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -64,6 +63,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Shell Script.Frontend.executor": "Run",
     "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/johnsong/WebstormProjects/uga-auto-scheduling/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -72,13 +72,22 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
+    "npm.start.executor": "Run",
     "prettierjs.PrettierConfiguration.Package": "/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/node_modules/prettier",
     "settings.editor.selected.configurable": "settings.typescriptcompiler",
     "ts.external.directory.path": "/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.start">
     <configuration name="Frontend" type="ShConfigurationType">
       <option name="SCRIPT_TEXT" value="bun run dev" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
@@ -94,6 +103,21 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="/$PROJECT_DIR$/backend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -111,7 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707523782440</updated>
       <workItem from="1707523783662" duration="8426000" />
-      <workItem from="1707540081200" duration="2313000" />
+      <workItem from="1707540081200" duration="5158000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Project Setup">
       <option name="closed" value="true" />
@@ -129,15 +153,35 @@
       <option name="project" value="LOCAL" />
       <updated>1707525389087</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated tsconfig.json for frontend&#10;Added landing, login, and signup pages">
+      <option name="closed" value="true" />
+      <created>1707575757632</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707575757632</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Project Setup" />
     <MESSAGE value="Re-setup backend" />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-setup backend" />
+    <MESSAGE value="Updated tsconfig.json for frontend&#10;Added landing, login, and signup pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated tsconfig.json for frontend&#10;Added landing, login, and signup pages" />
   </component>
 </project>
