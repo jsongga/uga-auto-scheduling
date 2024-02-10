@@ -123,25 +123,29 @@ export class Class {
 	}
 }
 // Define the Schedule structure
-var Schedule = /** @class */ (function () {
-	function Schedule(classes) {
+export class Schedule {
+	constructor(classes) {
 		this.classes = classes;
 		this.numClasses = classes.length;
 		// write later
 		this.totalTimeOnCampus = 0;
-		var sumProfRating = 0;
-		for (var i = 0; i < this.numClasses; i++) {
+		let sumProfRating = 0;
+		for (let i = 0; i < this.numClasses; i++) {
 			sumProfRating += classes[i].professor.rating;
 		}
 		this.avgProfessorRating = sumProfRating / this.numClasses;
 		// write later
 		this.totalDistance = 0;
 	}
-	return Schedule;
-})();
+    output() {
+        for (let i = 0 ; i < this.numClasses ; i++) {
+            this.classes[i].output()
+        }
+    }
+}
 // Function to check overlapping
 function overlapping(a1, b1, a2, b2) {
-	var _a;
+	let _a;
 	if (a1 > a2) {
 		(_a = [a2, a1]), (a1 = _a[0]), (a2 = _a[1]);
 	}
@@ -152,7 +156,7 @@ function overlapping(a1, b1, a2, b2) {
 }
 // Function to check if there's a conflict in time with the current class
 function ConflictTime(classX, classY) {
-	for (var i = 0; i < 5; i++) {
+	for (let i = 0; i < 5; i++) {
 		if (classX.startTime[i] == 0 || classY.startTime[i] == 0) continue;
 		if (
 			overlapping(
@@ -166,12 +170,12 @@ function ConflictTime(classX, classY) {
 	}
 	return false;
 }
-var curSchedule = [];
-var ClassGroups;
-var schedules;
+let curSchedule = [];
+let ClassGroups = [];
+let schedules = [];
 // Check if class can be pushed in
 function pushable(classX) {
-	for (var i = 0; i < curSchedule.length; i++) {
+	for (let i = 0; i < curSchedule.length; i++) {
 		if (ConflictTime(classX, curSchedule[i])) return false;
 	}
 	return true;
@@ -181,13 +185,33 @@ function makeSchedule(i) {
 	if (i == ClassGroups.length) {
 		schedules.push(new Schedule(curSchedule));
 	}
-	var numClasses = ClassGroups[i].length;
-	for (var j = 0; j < numClasses; j++) {
-		var classX = ClassGroups[i][j];
+	let numClasses = ClassGroups[i].length;
+	for (let j = 0; j < numClasses; j++) {
+		let classX = ClassGroups[i][j];
+        console.log(typeof(classX))
 		if (pushable(classX)) {
 			curSchedule.push(classX);
 			makeSchedule(i + 1);
 			curSchedule.pop();
 		}
 	}
+}
+
+export function main() {
+    // CSCI 1302
+    ClassGroups.push([getClass(26245), getClass(26311), getClass(36424), getClass(64229), getClass(69400)])
+    // CSCI 2610
+    ClassGroups.push([getClass(26368), getClass(26372), getClass(43005), getClass(64228)])
+    // PHYS 1112
+    ClassGroups.push([getClass(27133), getClass(27144), getClass(27150), getClass(45173)])
+    // ENGL 1101
+    ClassGroups.push([getClass(27603), getClass(27662), getClass(27667), getClass(27670)])
+
+    makeSchedule(0)
+
+    console.log(schedules.length)
+
+    for(let i = 0 ; i < schedules.length ; i++) {
+        schedules[i].output()
+    }
 }

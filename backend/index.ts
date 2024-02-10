@@ -1,7 +1,7 @@
 /* —— Setup Express —— */
 import express from "express";
 import fs from "fs";
-import { findProfessor, getClass, Professor, Class } from "./src/scripts/algorithm.js";
+import { findProfessor, getClass, Professor, Class, main } from "./src/scripts/algorithm.js";
 const app = express();
 const port = 8080;
 
@@ -38,7 +38,5 @@ app.use("/", routes);
 
 // });
 
-
-let x = new Class(26626);
-x.output()
+main()
 // // backend\src\scripts\algorithm.j/s
