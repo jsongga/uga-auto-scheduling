@@ -1,6 +1,6 @@
 import update from "immutability-helper";
-import React, { FC, useCallback, useState } from "react";
-import { CardWrapper } from "./CardWrapper.tsx";
+import React, { FC, useCallback, useEffect, useState } from "react";
+import CardWrapper from "./CardWrapper.tsx";
 import { Box, styled } from "@mui/joy";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
@@ -11,43 +11,22 @@ import { DndProvider } from "react-dnd";
 
 export interface Item {
   id: number;
-  text: string;
+  text: string[];
 }
 
 // export interface ContainerState {
 //   cards: Item[];
 // }
 
-export const Reorder: FC = () => {
+export const Reorder = (props: { list: string[] }) => {
+  // useEffect(() => {
+  //   setCards(props.list.map((text, id) => ({ id, text })) as Item[]);
+  // }, [props.list]);
+
   const [cards, setCards] = useState<Item[]>([
-    {
-      id: 1,
-      text: "Write a cool JS library",
-    },
-    {
-      id: 2,
-      text: "Make it generic enough",
-    },
-    {
-      id: 3,
-      text: "Write README",
-    },
-    {
-      id: 4,
-      text: "Create some examples",
-    },
-    {
-      id: 5,
-      text: "Spam in Twitter and IRC to promote it (note that this element is taller than the others)",
-    },
-    {
-      id: 6,
-      text: "???",
-    },
-    {
-      id: 7,
-      text: "PROFIT",
-    },
+    { id: 1, text: [] },
+    { id: 2, text: [] },
+    { id: 3, text: [] },
   ]);
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
@@ -70,10 +49,11 @@ export const Reorder: FC = () => {
           id={card.id}
           text={card.text}
           moveCard={moveCard}
+          options={props.list}
         />
       );
     },
-    [moveCard],
+    [moveCard, props.list],
   );
 
   return (

@@ -1,17 +1,5 @@
 import fs from "fs";
-
-let professors;
-let courses;
-
-try {
-	const professorsData = fs.readFileSync("./src/ugaProfessors.json", "utf8");
-	professors = JSON.parse(professorsData);
-
-	const coursesData = fs.readFileSync("./src/courses.json", "utf8");
-	courses = JSON.parse(coursesData);
-} catch (err) {
-	console.error(err);
-}
+import { Module } from "module";
 
 export class Professor {
 	constructor(firstName, lastName, rating) {
@@ -21,15 +9,12 @@ export class Professor {
 	}
 
 	output() {
-		console.log(
-			"Professor Name: " + this.firstName + " " + this.lastName + "\n"
-		);
+		console.log("Professor Name: " + this.fname + this.lname + "\n");
 		console.log("Rating: " + this.rating);
 	}
 }
 
 export function findProfessor(professor) {
-	console.log(professor);
 	// Input: one string
 	let pos = professor.split(" ");
 	let fname = pos[0];
@@ -40,28 +25,45 @@ export function findProfessor(professor) {
 	}
 
 	let finitiallname = finitial + " " + lname;
+	fs.readFile("./src/ugaProfessors.json", "utf8", (err, data) => {
+		if (err) {
+			console.error(err);
+		}
 
-	if (professors[finitiallname] !== undefined) {
-		let curObj = professors[finitiallname];
-		return new Professor(
-			curObj.firstName,
-			curObj.lastName,
-			curObj.avgRating
-		);
-	}
-	return new Professor("Unknown", "Unknown", 0);
+		let obj = JSON.parse(data);
+		// console.log(obj)
+
+		if (obj[finitiallname] !== undefined) {
+			// console.log(obj[finitiallname])
+			let curObj = obj[finitiallname];
+			return new Professor(
+				curObj.firstName,
+				curObj.lastName,
+				curObj.avgRating
+			);
+		}
+	});
 }
 
 export function getClass(crn) {
 	let finalResult = [];
+	fs.readFile("./src/courses.json", "utf8", (err, data) => {
+		if (err) {
+			console.error(err);
+		}
 
-	let objList = Object.values(courses);
-	finalResult = objList.filter((c) => crn == c.crn);
+		let obj = JSON.parse(data);
+		// console.log(obj)
 
-	if (finalResult.length == 0) {
-		return "No class found";
-	}
+		let objList = Object.values(obj);
 
+		const result = objList.filter((c) => crn == c.crn);
+
+		// console.log(result)
+
+		finalResult = result;
+		//type array
+	});
 	return finalResult;
 }
 
@@ -71,7 +73,6 @@ export class Class {
 		let result = getClass(crn);
 		console.log(typeof result);
 		this.courseNumber = result[0].courseNumber;
-		console.log(this.courseNumber);
 		this.courseName = result[0].courseName;
 		this.crn = crn;
 		this.professor = findProfessor(result[0].instructor);
@@ -80,7 +81,6 @@ export class Class {
 		this.location = ["", "", "", "", ""]; // string
 		this.rooms = [0, 0, 0, 0, 0];
 		this.seats = result[0].seatsAvailable;
-
 		for (let i = 0; i < result.length; i++) {
 			for (let j = 0; j < result[i].days.length; j++) {
 				let id = 0;
@@ -118,7 +118,7 @@ export class Class {
 		}
 		console.log("Course Location:\n");
 		for (let i = 0; i < 5; i++) {
-			console.log(this.location[i] + " " + this.rooms[i] + "\n");
+			console.log(this.location[i] + " " + this.room[i] + "\n");
 		}
 	}
 }
@@ -145,7 +145,7 @@ export class Schedule {
 }
 // Function to check overlapping
 function overlapping(a1, b1, a2, b2) {
-	let _a;
+	var _a;
 	if (a1 > a2) {
 		(_a = [a2, a1]), (a1 = _a[0]), (a2 = _a[1]);
 	}
@@ -156,7 +156,7 @@ function overlapping(a1, b1, a2, b2) {
 }
 // Function to check if there's a conflict in time with the current class
 function ConflictTime(classX, classY) {
-	for (let i = 0; i < 5; i++) {
+	for (var i = 0; i < 5; i++) {
 		if (classX.startTime[i] == 0 || classY.startTime[i] == 0) continue;
 		if (
 			overlapping(
@@ -170,12 +170,12 @@ function ConflictTime(classX, classY) {
 	}
 	return false;
 }
-let curSchedule = [];
-let ClassGroups = [];
-let schedules = [];
+var curSchedule = [];
+var ClassGroups;
+var schedules;
 // Check if class can be pushed in
 function pushable(classX) {
-	for (let i = 0; i < curSchedule.length; i++) {
+	for (var i = 0; i < curSchedule.length; i++) {
 		if (ConflictTime(classX, curSchedule[i])) return false;
 	}
 	return true;
