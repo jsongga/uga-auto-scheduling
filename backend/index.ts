@@ -1,5 +1,6 @@
 /* —— Setup Express —— */
 import express from "express";
+import fs from "fs";
 const app = express();
 const port = 8080;
 
@@ -17,9 +18,28 @@ app.listen(port, () => {
 
 app.use("/", routes);
 
-fetchWalkingDistance("Vancouver, BC", "Seattle, WA").then((data) =>
-  console.log(data),
-);
+// fs.readFile("./src/buildings.json", "utf8", (err, data) => {
+//   if (err) {
+//     console.error(err);
+//   }
+
+//   let obj = JSON.parse(data);
+//   console.log(obj);
+
+//   for (let [key, value] of Object.entries(obj)) {
+//     console.log(`${key}`);
+//     fetchWalkingDistance(`${value}`, "Russell Hall, 515 Baxter St, Athens, GA 30602").then((data) => {
+//       if (data.status !== "OK") {
+//         console.log(`${key}`);
+//         console.log(data.status);
+//       }
+//     });
+//   }
+
+// });
+
+
+
 
 parseCSVData()
 // // backend\src\scripts\algorithm.js

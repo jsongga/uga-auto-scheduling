@@ -105,7 +105,11 @@ export const CardWrapper: FC<CardProps> = ({ id, text, index, moveCard }) => {
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <div ref={ref} style={{ opacity }} data-handler-id={handlerId}>
+    <div
+      ref={ref}
+      style={{ opacity, backgroundColor: "transparent" }}
+      data-handler-id={handlerId}
+    >
       <SingleCard>{text}</SingleCard>
     </div>
   );
