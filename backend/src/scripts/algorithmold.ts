@@ -1,9 +1,9 @@
 
 class Professor {
-    public firstName: String
-    public lastName: String
+    public firstName: string
+    public lastName: string
     public rating: number
-    constructor(firstName: String, lastName: String, rating: number) {
+    constructor(firstName: string, lastName: string, rating: number) {
         this.firstName = firstName
         this.lastName = lastName
         this.rating = rating
@@ -12,15 +12,15 @@ class Professor {
 
 // Define the class structure
 class Class {
-    public courseNumber: String
-    public courseName: String
+    public courseNumber: string
+    public courseName: string
     public professor: Professor
     public crn: number
     public startTime: number[]
     public endTime: number[]
-    public location: String
-    constructor(courseNumber: String, courseName: String, professor: Professor, 
-        crn: number, timeFrame: String, day: String, location: String) {
+    public location: string
+    constructor(courseNumber: string, courseName: string, professor: Professor, 
+        crn: number, timeFrame: string, day: string, location: string) {
         this.courseNumber = courseNumber;
         this.courseName = courseName;
         this.professor = professor;
