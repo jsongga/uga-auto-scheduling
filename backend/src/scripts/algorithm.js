@@ -29,7 +29,7 @@ export class Professor {
 }
 
 export function findProfessor(professor) {
-	console.log(professor);
+	// console.log(professor);
 	// Input: one string
 	let pos = professor.split(" ");
 	let fname = pos[0];
@@ -69,9 +69,10 @@ export function getClass(crn) {
 export class Class {
 	constructor(crn) {
 		let result = getClass(crn);
-		console.log(typeof result);
+		//console.log(typeof result);
+        //console.log(result[0].courseNumber)
 		this.courseNumber = result[0].courseNumber;
-		console.log(this.courseNumber);
+		//console.log(this.courseNumber);
 		this.courseName = result[0].courseName;
 		this.crn = crn;
 		this.professor = findProfessor(result[0].instructor);
@@ -125,8 +126,17 @@ export class Class {
 // Define the Schedule structure
 export class Schedule {
 	constructor(classes) {
-		this.classes = classes;
 		this.numClasses = classes.length;
+        this.classes = []
+        for(let i = 0 ; i < this.numClasses ; i++) {
+            this.classes.push(classes[i])
+        }
+        /*
+        console.log("Schedule")
+        for (let i = 0 ; i < this.numClasses ; i++) {
+            console.log(this.classes[i].crn);
+        }
+        */
 		// write later
 		this.totalTimeOnCampus = 0;
 		let sumProfRating = 0;
@@ -139,7 +149,7 @@ export class Schedule {
 	}
     output() {
         for (let i = 0 ; i < this.numClasses ; i++) {
-            this.classes[i].output()
+            console.log(this.classes[i].crn)
         }
     }
 }
@@ -182,13 +192,15 @@ function pushable(classX) {
 }
 // Function to make schedule
 function makeSchedule(i) {
+    // console.log(i)
 	if (i == ClassGroups.length) {
 		schedules.push(new Schedule(curSchedule));
+        return;
 	}
 	let numClasses = ClassGroups[i].length;
 	for (let j = 0; j < numClasses; j++) {
 		let classX = ClassGroups[i][j];
-        console.log(typeof(classX))
+        //console.log(typeof(classX))
 		if (pushable(classX)) {
 			curSchedule.push(classX);
 			makeSchedule(i + 1);
@@ -197,21 +209,46 @@ function makeSchedule(i) {
 	}
 }
 
+function bestRMPSchedule() {
+    let bestSchedule = schedules[0]
+    for (let i = 1 ; i < schedules.length ; i++) {
+        if(schedules[i].avgProfessorRating > bestSchedule.avgProfessorRating) {
+            bestSchedule = schedules[i];
+        }
+    }
+    return bestSchedule
+}
+
 export function main() {
     // CSCI 1302
-    ClassGroups.push([getClass(26245), getClass(26311), getClass(36424), getClass(64229), getClass(69400)])
+    ClassGroups.push([new Class(26245), 
+                    new Class(26311), 
+                    new Class(36424), 
+                    new Class(64229), 
+                    new Class(69400)])
     // CSCI 2610
-    ClassGroups.push([getClass(26368), getClass(26372), getClass(43005), getClass(64228)])
+    ClassGroups.push([new Class(26368), 
+                    new Class(26372),  
+                    new Class(43005), 
+                    new Class(64228)])
     // PHYS 1112
-    ClassGroups.push([getClass(27133), getClass(27144), getClass(27150), getClass(45173)])
+    ClassGroups.push([new Class(27133), 
+                    new Class(27144), 
+                    new Class(27150), 
+                    new Class(45173)])
     // ENGL 1101
-    ClassGroups.push([getClass(27603), getClass(27662), getClass(27667), getClass(27670)])
+    ClassGroups.push([new Class(27603), 
+                    new Class(27662), 
+                    new Class(27667), 
+                    new Class(27670)])
 
     makeSchedule(0)
 
     console.log(schedules.length)
 
-    for(let i = 0 ; i < schedules.length ; i++) {
-        schedules[i].output()
-    }
+    let bestSchedule = bestRMPSchedule()
+
+    console.log(bestSchedule)
+    
+    
 }
