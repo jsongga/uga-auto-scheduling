@@ -9,3 +9,5 @@ defaultRoute.get("/", (req, res) => {
 defaultRoute.get("/courses", (req, res) => {
   res.send(["Courses"]);
 });
+
+

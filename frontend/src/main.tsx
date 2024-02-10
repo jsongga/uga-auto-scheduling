@@ -10,6 +10,12 @@ import NotFound from "./pages/NotFound.tsx";
 import Login from "./pages/Login.tsx";
 import ScheduleCreator from "./pages/ScheduleCreator.tsx";
 
+const domain = "dev-hngcj4gnq03d0dw2.us.auth0.com";
+const clientId = "zY5pzNXnlxSpC2YaDByP9pGzClDW5x8A";
+
+import { Auth0Provider } from '@auth0/auth0-react';
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,7 +47,15 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}
+    >
     {/*<Landing />*/}
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
+    </Auth0Provider>
   </React.StrictMode>,
 );

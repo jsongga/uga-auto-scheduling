@@ -137,11 +137,11 @@ export class Schedule {
 		// write later
 		this.totalDistance = 0;
 	}
-    output() {
-        for (let i = 0 ; i < this.numClasses ; i++) {
-            this.classes[i].output()
-        }
-    }
+	output() {
+		for (let i = 0; i < this.numClasses; i++) {
+			this.classes[i].output();
+		}
+	}
 }
 // Function to check overlapping
 function overlapping(a1, b1, a2, b2) {
@@ -188,7 +188,7 @@ function makeSchedule(i) {
 	let numClasses = ClassGroups[i].length;
 	for (let j = 0; j < numClasses; j++) {
 		let classX = ClassGroups[i][j];
-        console.log(typeof(classX))
+		console.log(classX instanceof Class);
 		if (pushable(classX)) {
 			curSchedule.push(classX);
 			makeSchedule(i + 1);
@@ -198,20 +198,26 @@ function makeSchedule(i) {
 }
 
 export function main() {
-    // CSCI 1302
-    ClassGroups.push([getClass(26245), getClass(26311), getClass(36424), getClass(64229), getClass(69400)])
-    // CSCI 2610
-    ClassGroups.push([getClass(26368), getClass(26372), getClass(43005), getClass(64228)])
-    // PHYS 1112
-    ClassGroups.push([getClass(27133), getClass(27144), getClass(27150), getClass(45173)])
-    // ENGL 1101
-    ClassGroups.push([getClass(27603), getClass(27662), getClass(27667), getClass(27670)])
+	// CSCI 1302
+	ClassGroups.push([
+		Class(26245),
+		Class(26311),
+		Class(36424),
+		Class(64229),
+		Class(69400),
+	]);
+	// CSCI 2610
+	ClassGroups.push([Class(26368), Class(26372), Class(43005), Class(64228)]);
+	// PHYS 1112
+	ClassGroups.push([Class(27133), Class(27144), Class(27150), Class(45173)]);
+	// ENGL 1101
+	ClassGroups.push([Class(27603), Class(27662), Class(27667), Class(27670)]);
 
-    makeSchedule(0)
+	makeSchedule(0);
 
-    console.log(schedules.length)
+	console.log(schedules.length);
 
-    for(let i = 0 ; i < schedules.length ; i++) {
-        schedules[i].output()
-    }
+	for (let i = 0; i < schedules.length; i++) {
+		schedules[i].output();
+	}
 }
