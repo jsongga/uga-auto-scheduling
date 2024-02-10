@@ -1,10 +1,13 @@
 import update from "immutability-helper";
 import React, { FC, useCallback, useState } from "react";
 import { CardWrapper } from "./CardWrapper.tsx";
+import { Box, styled } from "@mui/joy";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
 
-const style: React.CSSProperties = {
-  width: 400,
-};
+// const style: React.CSSProperties = {
+//   width: 400,
+// };
 
 export interface Item {
   id: number;
@@ -74,8 +77,18 @@ export const Reorder: FC = () => {
   );
 
   return (
-    <>
-      <div style={style}>{cards.map((card, i) => renderCard(card, i))}</div>
-    </>
+    <DndProvider backend={HTML5Backend}>
+      <StyledWrapper>
+        {cards.map((card, i) => renderCard(card, i))}
+      </StyledWrapper>
+    </DndProvider>
   );
 };
+
+const StyledWrapper = styled(Box)`
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 100%;
+`;
