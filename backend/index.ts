@@ -1,27 +1,13 @@
 /* —— Setup Express —— */
 import express from "express";
 import fs from "fs";
-import {
-  findProfessor,
-  getClass,
-  Professor,
-  Class,
-} from "./src/scripts/algorithm.js";
-const cors = require("cors");
-
+import { findProfessor, getClass, Professor, Class, main } from "./src/scripts/algorithm.js";
 const app = express();
 const port = 8080;
 
 import { routes } from "./src/routes/index.ts";
 import fetchWalkingDistance from "./src/scripts/fetchWalkingDistance.js";
 
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions)); // Use this after the variable declaration
 // app.get("/", (req, res) => {
 //   res.send("Hello World!");
 // });
@@ -29,8 +15,6 @@ app.use(cors(corsOptions)); // Use this after the variable declaration
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });
-
-app.use(express.json());
 
 app.use("/", routes);
 
@@ -53,9 +37,5 @@ app.use("/", routes);
 //   }
 
 // });
-
-let x = getClass(26626);
-console.log(x);
-//let x = new Class(26626);
-//x.output()
-// // backend\src\scripts\algorithm.j/s
+main()
+// // backend\src\scripts\algorithm.j/
