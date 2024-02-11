@@ -318,6 +318,10 @@ function checkClass(classX) {
 }
 
 export function createSchedule(requests) {
+  curSchedule = [];
+  ClassGroups = [];
+  schedules = [];
+
   console.log(requests.length);
   for (let t = 0; t < requests.length; t++) {
     let request = requests[t];
@@ -335,8 +339,8 @@ export function createSchedule(requests) {
         }
       }
     }
+    ClassGroups.push(tmp);
   }
-  ClassGroups.push(tmp);
   makeSchedule(0);
   // printing the output: json
   // console.log("{");
