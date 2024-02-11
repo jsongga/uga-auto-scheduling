@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const API_KEY = "AIzaSyBQ9ssgMpjmjaCchzHKdL3BrSk36nHN6C8";
 
 const fetchWalkingDistance = async (origin, destination) => {
   const response = await fetch(

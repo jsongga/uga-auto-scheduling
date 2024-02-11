@@ -1,4 +1,5 @@
-import { Avatar, Box, Button, Stack, styled, Typography } from "@mui/joy";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Avatar, Box, Button, Stack, styled, Typography, Dropdown, MenuButton, Menu, MenuItem } from "@mui/joy";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
@@ -7,6 +8,12 @@ export default function Navbar() {
   const goToSignup = () => navigate("/signup");
   const goToLogin = () => navigate("/login");
   const goToSchedule = () => navigate("/scheduler");
+
+  const { user, isAuthenticated, isLoading, logout } = useAuth0();
+
+  const handleAvatarClick = () => {
+    navigate("/profile");
+  };
 
   return (
     <NavContainer>
@@ -23,7 +30,16 @@ export default function Navbar() {
           {/*  <NavButtons variant={"plain"} onClick={goToLogin}>*/}
           {/*    Login*/}
           {/*  </NavButtons>*/}
-          <Avatar alt={"User"} src={""} />
+          <Dropdown>
+            <MenuButton>
+              <Avatar alt={user?.name} src={user?.picture} />
+            </MenuButton>
+            <Menu>
+              <MenuItem onClick={handleAvatarClick}>Profile</MenuItem>
+              <MenuItem onClick={() => logout({ logoutParams: { returnTo: "https://172.20.147.40:5173" } })}>Logout</MenuItem>
+            </Menu>
+          </Dropdown>
+
         </Stack>
       </Stack>
     </NavContainer>
