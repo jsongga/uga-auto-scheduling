@@ -23,7 +23,6 @@ export default function Landing() {
   const goToSignup = () => navigate("/signup");
   const goToLogin = () => navigate("/login");
 
-
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   const onLoginClick = () => {
@@ -32,7 +31,7 @@ export default function Landing() {
     } else {
       loginWithRedirect();
     }
-  }
+  };
 
   const onSignUpClick = () => {
     if (isAuthenticated) {
@@ -40,12 +39,12 @@ export default function Landing() {
     } else {
       loginWithRedirect({
         authorizationParams: {
-          screen_hint: "signup"
-        }
+          screen_hint: "signup",
+        },
       });
     }
-  }
-  
+  };
+
   return (
     <Box>
       <StyledSheet1>
@@ -53,7 +52,7 @@ export default function Landing() {
           <Stack direction={"row"} justifyContent={"space-between"}>
             <AppName level={"h1"}>Scheduler</AppName>
             <Button variant={"plain"} onClick={onLoginClick} sx={{ margin: 3 }}>
-              Login
+              {isAuthenticated ? "Create a Schedule" : "Login"}
             </Button>
           </Stack>
           <Grid container>
@@ -74,7 +73,7 @@ export default function Landing() {
                       size={"lg"}
                       onClick={onSignUpClick}
                     >
-                      Sign-up
+                      {isAuthenticated ? "Go to Scheduler" : "Sign-up"}
                     </MainButton>
                     <MainButton
                       variant={"outlined"}
