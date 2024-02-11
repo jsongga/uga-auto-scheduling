@@ -109,7 +109,10 @@ export default function Landing() {
       <StyledSheet2 ref={myRef}>
         <Grid container>
           <Grid md={6} xs={12}>
-            <Card>Rate My Professor</Card>
+            <Card>
+              <Typography level={"h3"}>Rate My Professor</Typography>
+              Uses JQuery to scrape over 5000 professor ratings from Rate My Professor and saves it to a localized database.
+              </Card>
           </Grid>
           <Grid md={6} xs={12}>
             <Card>Google Distance API</Card>
