@@ -37,6 +37,7 @@ const Build = (props: { events: Event[] }) => {
         //   },
         // ]}
         headerToolbar={false}
+        scrollTime={"7:00:00"}
         eventContent={function (renderInfo) {
           return {
             html: `

@@ -57,7 +57,7 @@ defaultRoute.post("/scheduling", (req, res) => {
 
     console.log(JSON.stringify(schedule));
 
-    res.json({"hello": "world"});
+    res.json(schedule);
 
   } catch (e) {
     console.error(e);
