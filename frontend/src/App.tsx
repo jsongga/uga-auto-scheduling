@@ -1,4 +1,4 @@
-
+import Build from "./pages/Build.tsx";
 import Landing from "./pages/Landing.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./pages/Signup.tsx";
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <AllTemplate />,
     children: [
+    {
+      path: "/build",
+      element: <Build />,
+    },
     {
       path: "/",
       element: <Landing />,

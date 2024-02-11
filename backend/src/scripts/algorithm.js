@@ -1,4 +1,5 @@
 import fs from "fs";
+import { get } from "http";
 
 let professors;
 let courses;
@@ -80,7 +81,7 @@ export function getClass(crn) {
 }
 
 export function getAllClass(classNum) {
-    // this should return a list of CRNs
+	// this should return a list of CRNs
 	let finalResult = [];
 
 	let objList = Object.values(courses);
@@ -90,12 +91,12 @@ export function getAllClass(classNum) {
 		return "No class found";
 	}
 
-    let final = [];
+	let final = [];
 
-    for (let i = 0 ; i < finalResult.length ; i++) {
-        if (i != 0 && finalResult[i].crn == finalResult[i - 1].crn) continue;
-        final.push(finalResult[i].crn);
-    }
+	for (let i = 0; i < finalResult.length; i++) {
+		if (i != 0 && finalResult[i].crn == finalResult[i - 1].crn) continue;
+		final.push(finalResult[i].crn);
+	}
 
 	return final;
 }
@@ -108,7 +109,7 @@ export class Class {
 		this.courseNumber = result[0].courseNumber;
 		this.courseName = result[0].courseName;
 		this.crn = crn;
-        this.group = numGroup;
+		this.group = numGroup;
 		this.professor = findProfessor(result[0].instructor);
 		this.startTime = [0, 0, 0, 0, 0];
 		this.endTime = [0, 0, 0, 0, 0];
@@ -159,11 +160,10 @@ export class Class {
 
 // find location of a building from the buildings.json file
 export function findBuilding(building) {
-    console.log(building)
-    console.log(buildings[building])
-    return buildings[building]
+	console.log(building);
+	console.log(buildings[building]);
+	return buildings[building];
 }
-
 
 // Define the Schedule structure
 export class Schedule {
@@ -172,30 +172,30 @@ export class Schedule {
 		this.numClasses = classes.length;
 		// write later
 		this.totalTimeOnCampus = 0;
-        this.totalDaysOnCampus = 0;
-        let minTime = [1440, 1440, 1440, 1440, 1440]
-        let maxTime = [0, 0, 0, 0, 0]
-        for (let i = 0 ; i < this.numClasses ; i++) {
-            for (let j = 0 ; j < 5 ; j++) {
-                if(classes[i].startTime[j] == 0) continue;
-                minTime[j] = Math.min(minTime[j], classes[i].startTime[j]);
-                maxTime[j] = Math.max(maxTime[j], classes[i].endTime[j]);
-            }
-        }
-        for (let i = 0 ; i < 5 ; i++) {
-            if(minTime[i] < maxTime[i]) {
-                this.totalDaysOnCampus++;
-                this.totalTimeOnCampus += (maxTime[i] - minTime[i]);
-            }
-        }
+		this.totalDaysOnCampus = 0;
+		let minTime = [1440, 1440, 1440, 1440, 1440];
+		let maxTime = [0, 0, 0, 0, 0];
+		for (let i = 0; i < this.numClasses; i++) {
+			for (let j = 0; j < 5; j++) {
+				if (classes[i].startTime[j] == 0) continue;
+				minTime[j] = Math.min(minTime[j], classes[i].startTime[j]);
+				maxTime[j] = Math.max(maxTime[j], classes[i].endTime[j]);
+			}
+		}
+		for (let i = 0; i < 5; i++) {
+			if (minTime[i] < maxTime[i]) {
+				this.totalDaysOnCampus++;
+				this.totalTimeOnCampus += maxTime[i] - minTime[i];
+			}
+		}
 		let sumProfRating = 0;
-		for (let i = 0 ; i < this.numClasses ; i++) {
+		for (let i = 0; i < this.numClasses; i++) {
 			sumProfRating += classes[i].professor.rating;
 		}
 		this.avgProfessorRating = sumProfRating / this.numClasses;
 		// write later
 		this.totalDistance = 0;
-        /*
+		/*
         for(let day = 0 ; day < 5 ; day++) {
             // calculate the total walking distance for each days
             let arr = [];
@@ -216,11 +216,11 @@ export class Schedule {
         }
         */
 	}
-    output() {
-        for (let i = 0 ; i < this.numClasses ; i++) {
-            console.log(this.classes[i].crn)
-        }
-    }
+	output() {
+		for (let i = 0; i < this.numClasses; i++) {
+			console.log(this.classes[i].crn);
+		}
+	}
 }
 // Function to check overlapping
 function overlapping(a1, b1, a2, b2) {
@@ -277,45 +277,51 @@ function makeSchedule(i) {
 }
 
 function bestRMPSchedule() {
-    let bestSchedule = schedules[0]
-    for (let i = 1 ; i < schedules.length ; i++) {
-        if(schedules[i].avgProfessorRating > bestSchedule.avgProfessorRating) {
-            bestSchedule = schedules[i];
-        }
-    }
-    return bestSchedule
+	let bestSchedule = schedules[0];
+	for (let i = 1; i < schedules.length; i++) {
+		if (schedules[i].avgProfessorRating > bestSchedule.avgProfessorRating) {
+			bestSchedule = schedules[i];
+		}
+	}
+	return bestSchedule;
 }
 
 export function main() {
-    // CSCI 1302
-    ClassGroups.push([new Class(26245), 
-                    new Class(26311), 
-                    new Class(36424), 
-                    new Class(64229), 
-                    new Class(69400)])
-    // CSCI 2610
-    ClassGroups.push([new Class(26368), 
-                    new Class(26372),  
-                    new Class(43005), 
-                    new Class(64228)])
-    // PHYS 1112
-    ClassGroups.push([new Class(27133), 
-                    new Class(27144), 
-                    new Class(27150), 
-                    new Class(45173)])
-    // ENGL 1101
-    ClassGroups.push([new Class(27603), 
-                    new Class(27662), 
-                    new Class(27667), 
-                    new Class(27670)])
+	// CSCI 1302
+	ClassGroups.push([
+		new Class(26245),
+		new Class(26311),
+		new Class(36424),
+		new Class(64229),
+		new Class(69400),
+	]);
+	// CSCI 2610
+	ClassGroups.push([
+		new Class(26368),
+		new Class(26372),
+		new Class(43005),
+		new Class(64228),
+	]);
+	// PHYS 1112
+	ClassGroups.push([
+		new Class(27133),
+		new Class(27144),
+		new Class(27150),
+		new Class(45173),
+	]);
+	// ENGL 1101
+	ClassGroups.push([
+		new Class(27603),
+		new Class(27662),
+		new Class(27667),
+		new Class(27670),
+	]);
 
-    makeSchedule(0)
+	makeSchedule(0);
 
-    console.log(schedules.length)
+	console.log(schedules.length);
 
-    let bestSchedule = bestRMPSchedule()
+	let bestSchedule = bestRMPSchedule();
 
-    console.log(bestSchedule)
-    
-    
+	console.log(bestSchedule);
 }
