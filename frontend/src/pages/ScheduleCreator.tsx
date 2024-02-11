@@ -146,7 +146,7 @@ export default function ScheduleCreator() {
   }, [schedule, gotOptions]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8080/courses")
+    fetch("/courses")
       .then((res) => res.json())
       .then((data) => {
         setClasses(
@@ -170,7 +170,7 @@ export default function ScheduleCreator() {
       body: JSON.stringify(schedule),
     };
     console.log(requestOptions.body);
-    fetch("http://localhost:8080/scheduling", requestOptions)
+    fetch("/scheduling", requestOptions)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

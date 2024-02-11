@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Created README.md">
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/README.md" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/README.md" afterDir="false" />
+    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Updated README.md">
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.ts" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="57899" />
+    <option name="totalTimeSeconds" value="59487" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -39,29 +41,30 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.fetchWalkingDistance.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Shell Script.Frontend.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/johnsong/WebstormProjects/uga-auto-scheduling/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.fetchWalkingDistance.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Shell Script.Frontend.executor": "Run",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/johnsong/WebstormProjects/uga-auto-scheduling/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.start.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.typescriptcompiler",
+    "ts.external.directory.path": "/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend" />
@@ -71,7 +74,7 @@
       <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.build">
     <configuration name="fetchWalkingDistance.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="/$PROJECT_DIR$/backend/src/scripts/fetchWalkingDistance.js" working-dir="/$PROJECT_DIR$/backend/src/scripts">
       <method v="2" />
     </configuration>
@@ -90,6 +93,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="/$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="/$PROJECT_DIR$/backend/package.json" />
       <command value="run" />
@@ -103,6 +116,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
         <item itemvalue="Node.js.fetchWalkingDistance.js" />
       </list>
     </recent_temporary>
@@ -124,7 +138,7 @@
       <updated>1707523782440</updated>
       <workItem from="1707523783662" duration="8426000" />
       <workItem from="1707540081200" duration="37612000" />
-      <workItem from="1707622756192" duration="18343000" />
+      <workItem from="1707622756192" duration="21011000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Project Setup">
       <option name="closed" value="true" />
@@ -286,7 +300,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707641501010</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Updated README.md">
+      <option name="closed" value="true" />
+      <created>1707642006615</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1707642006615</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +346,7 @@
     <MESSAGE value="Updated calendar view" />
     <MESSAGE value="Added sorting functions" />
     <MESSAGE value="Created README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created README.md" />
+    <MESSAGE value="Updated README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated README.md" />
   </component>
 </project>

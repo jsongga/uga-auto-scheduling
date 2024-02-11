@@ -32,7 +32,11 @@ app.listen(port, () => {
 
 app.use(express.json());
 
+app.use(express.static("../frontend/dist"));
+// app.use("/profile", express.static("../frontend/dist"));
+
 app.use("/", routes);
+app.use("*", express.static("../frontend/dist"));
 
 // fs.readFile("./src/buildings.json", "utf8", (err, data) => {
 //   if (err) {
