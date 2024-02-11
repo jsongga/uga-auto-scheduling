@@ -1,7 +1,9 @@
 import fs from "fs";
+import fetchWalkingDistance from "./fetchWalkingDistance";
 
 let professors;
 let courses;
+let buildings;
 
 try {
 	const professorsData = fs.readFileSync("./src/ugaProfessors.json", "utf8");
@@ -9,6 +11,10 @@ try {
 
 	const coursesData = fs.readFileSync("./src/courses.json", "utf8");
 	courses = JSON.parse(coursesData);
+
+    const buildingsData = fs.readFileSync("./src/buildings.json", "utf8")
+    buildings = JSON.parse(buildingsData)
+
 } catch (err) {
 	console.error(err);
 }
@@ -65,9 +71,30 @@ export function getClass(crn) {
 	return finalResult;
 }
 
+export function getAllClass(classNum) {
+    // this should return a list of CRNs
+	let finalResult = [];
+
+	let objList = Object.values(courses);
+	finalResult = objList.filter((c) => classNum == c.courseNumber);
+
+	if (finalResult.length == 0) {
+		return "No class found";
+	}
+
+    let final = [];
+
+    for (let i = 0 ; i < finalResult.length ; i++) {
+        if (i != 0 && finalResult[i].crn == finalResult[i - 1].crn) continue;
+        final.push(finalResult[i].crn);
+    }
+
+	return final;
+}
+
 // Define the class structure
 export class Class {
-	constructor(crn) {
+	constructor(crn, numGroup = 0) {
 		let result = getClass(crn);
 		//console.log(typeof result);
         //console.log(result[0].courseNumber)
@@ -75,6 +102,7 @@ export class Class {
 		//console.log(this.courseNumber);
 		this.courseName = result[0].courseName;
 		this.crn = crn;
+        this.group = numGroup;
 		this.professor = findProfessor(result[0].instructor);
 		this.startTime = [0, 0, 0, 0, 0];
 		this.endTime = [0, 0, 0, 0, 0];
@@ -123,6 +151,15 @@ export class Class {
 		}
 	}
 }
+
+// find location of a building from the buildings.json file
+export function findBuilding(building) {
+    console.log(building)
+    console.log(buildings[building])
+    return buildings[building]
+}
+
+
 // Define the Schedule structure
 export class Schedule {
 	constructor(classes) {
@@ -139,18 +176,58 @@ export class Schedule {
         */
 		// write later
 		this.totalTimeOnCampus = 0;
+        this.totalDaysOnCampus = 0;
+        let minTime = [1440, 1440, 1440, 1440, 1440]
+        let maxTime = [0, 0, 0, 0, 0]
+        for (let i = 0 ; i < this.numClasses ; i++) {
+            for (let j = 0 ; j < 5 ; j++) {
+                if(classes[i].startTime[j] == 0) continue;
+                minTime[j] = Math.min(minTime[j], classes[i].startTime[j]);
+                maxTime[j] = Math.max(maxTime[j], classes[i].endTime[j]);
+            }
+        }
+        for (let i = 0 ; i < 5 ; i++) {
+            if(minTime[i] < maxTime[i]) {
+                this.totalDaysOnCampus++;
+                this.totalTimeOnCampus += (maxTime[i] - minTime[i]);
+            }
+        }
 		let sumProfRating = 0;
-		for (let i = 0; i < this.numClasses; i++) {
+		for (let i = 0 ; i < this.numClasses ; i++) {
 			sumProfRating += classes[i].professor.rating;
 		}
 		this.avgProfessorRating = sumProfRating / this.numClasses;
 		// write later
 		this.totalDistance = 0;
+        /*
+        for(let day = 0 ; day < 5 ; day++) {
+            // calculate the total walking distance for each days
+            let arr = [];
+            for(let i = 0 ; i < this.numClasses ; i++) {
+                for(let j = 0 ; j <= i ; j++) {
+                    if(j == i) arr.splice(j, 0, this.classes[i]);
+                    else if (this.classes[i].startTime[day] > arr[j].startTime[day]) {
+                        arr.splice(j, 0, this.classes[i]);
+                        break;
+                    }
+                }
+            }
+            for(let i = 1 ; i < arr.length ; i++) {
+                let location1 = findBuilding(arr[i - 1].location[day])
+                let location2 = findBuilding(arr[i].location[day])
+                fetchWalkingDistance(location1, location2).then((data) => console.log(data.rows[0].elements[0]))
+            }
+        }
+        */
 	}
     output() {
         for (let i = 0 ; i < this.numClasses ; i++) {
             console.log(this.classes[i].crn)
         }
+        console.log("AvgRating = " + this.avgProfessorRating);
+        console.log("Total time on campus " + this.totalTimeOnCampus);
+        console.log("Total days on campus " + this.totalDaysOnCampus);
+        // console.log("Total walking distance " + this.totalDistance);
     }
 }
 // Function to check overlapping
@@ -219,7 +296,36 @@ function bestRMPSchedule() {
     return bestSchedule
 }
 
+function addClassCRN(crns) {
+    let arr = []
+    for (let i = 0 ; i < crns.length ; i++) {
+        let x = new Class(crns[i])
+        if(checkClass(x)) arr.push(x)
+    }
+    ClassGroups.push(arr)
+}
+
+let earliestTime = [0, 0, 0, 0, 0]
+let latestTime = [1440, 1440, 1440, 1440, 1440]
+let lowestRating = 0
+let highestRating = 5
+
+function checkClass(classX) {
+    if(classX.professor.rating < lowestRating || classX.professor.rating > highestRating) return false;
+    for (let i = 0 ; i < 5 ; i++) {
+        if(classX.startTime[i] == 0) continue;
+        if(classX.startTime[i] < earliestTime[i]) return false;
+        if(classX.endTime[i] > latestTime[i]) return false;
+    }
+    return true;
+}
+
 export function main() {
+    let result1 = getAllClass('CSCI1302')
+    console.log(result1)
+    //let result2 = getAllClassProf('CSCI1302', 'Bradley Barnes')
+    //console.log(result2)
+    
     // CSCI 1302
     ClassGroups.push([new Class(26245), 
                     new Class(26311), 
@@ -246,9 +352,9 @@ export function main() {
 
     console.log(schedules.length)
 
-    let bestSchedule = bestRMPSchedule()
-
-    console.log(bestSchedule)
+    for(let i = 0 ; i < schedules.length ; i++) {
+        schedules[i].output()
+    }
     
     
 }
