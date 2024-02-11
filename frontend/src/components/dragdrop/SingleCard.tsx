@@ -14,11 +14,11 @@ import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import { useEffect, useState } from "react";
 import { Schedule } from "../../pages/ScheduleCreator.tsx";
 
-const options = ["CSCI 2610", "CSCI 2620", "CSCI 2630", "CSCI 2640"];
 const filter = createFilterOptions<string>();
 export default function SingleCard(props: {
   // children: React.ReactNode;
   options: string[];
+  optionsShort: string[];
   details: Schedule;
   setSchedule: any;
 }) {
@@ -50,15 +50,22 @@ export default function SingleCard(props: {
             )
           ) {
             return;
+          } else if (
+            (value as string[])[(value as string[]).length - 1]?.endsWith("...")
+          ) {
+            return;
+          } else {
+            props.setSchedule({
+              type: "change",
+              options: value,
+              uid: props.details.uid,
+            });
           }
-          props.setSchedule({
-            type: "change",
-            options: value,
-            uid: props.details.uid,
-          });
         }}
         value={props.details.options}
         filterOptions={(options, params) => {
+          if (params.inputValue.length <= 1) return props.optionsShort;
+
           const filtered = filter(options as string[], params);
 
           const { inputValue } = params;

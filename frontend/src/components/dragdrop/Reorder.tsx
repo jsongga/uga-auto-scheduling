@@ -22,6 +22,7 @@ import { Schedule } from "../../pages/ScheduleCreator.tsx";
 
 export const Reorder = (props: {
   list: string[];
+  listShort: string[];
   schedule: Schedule[];
   setSchedule: any;
 }) => {
@@ -60,6 +61,7 @@ export const Reorder = (props: {
           id={card.uid}
           // text={card.text}
           moveCard={moveCard}
+          optionsShort={props.listShort}
           options={props.list}
           details={card}
           setSchedule={props.setSchedule}

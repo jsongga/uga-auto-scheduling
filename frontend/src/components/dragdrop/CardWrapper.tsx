@@ -40,6 +40,7 @@ export default function CardWrapper(props: {
   options: string[];
   details: Schedule;
   setSchedule: any;
+  optionsShort: string[];
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop<
@@ -123,6 +124,7 @@ export default function CardWrapper(props: {
     >
       <SingleCard
         options={props.options}
+        optionsShort={props.optionsShort}
         details={props.details}
         setSchedule={props.setSchedule}
       />

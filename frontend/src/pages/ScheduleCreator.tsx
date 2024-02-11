@@ -78,6 +78,7 @@ export type Schedule = {
 
 export default function ScheduleCreator() {
   const [classes, setClasses] = useState(["Loading courses..."]);
+  const [classesShort, setClassesShort] = useState(["Loading courses..."]);
   const [schedule, setSchedule] = useReducer(scheduleReducer, [
     { options: [1], mustTake: false, priority: 0, uid: generateUID() },
     { options: [2], mustTake: false, priority: 1, uid: generateUID() },
@@ -88,7 +89,16 @@ export default function ScheduleCreator() {
     fetch("http://localhost:8080/courses")
       .then((res) => res.json())
       .then((data) => {
-        setClasses(data);
+        setClasses(
+          data.map(
+            (course: string) => course.slice(0, 4) + " " + course.slice(4),
+          ),
+        );
+        setClassesShort([
+          ...new Set<string>(
+            data.map((course: string) => course.slice(0, 4) + "..."),
+          ),
+        ]);
       });
   }, []);
 
@@ -102,7 +112,12 @@ export default function ScheduleCreator() {
         <Typography level={"h3"} mt={8} mb={2}>
           Create your schedule!
         </Typography>
-        <Reorder list={classes} schedule={schedule} setSchedule={setSchedule} />
+        <Reorder
+          list={classes}
+          listShort={classesShort}
+          schedule={schedule}
+          setSchedule={setSchedule}
+        />
         <Stack
           direction={"row"}
           gap={2}
