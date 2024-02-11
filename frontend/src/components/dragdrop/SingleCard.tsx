@@ -144,7 +144,7 @@ interface StyledStackProps extends StackProps {
 }
 
 const StyledStack = styled(Stack, {
-  // shouldForwardProp: (prop) => prop !== "special",
+  shouldForwardProp: (prop) => prop !== "special",
 })(({ special, theme }: StyledStackProps & { theme: Theme }) => ({
   // borderRadius: 20,
   boxShadow: `2px 2px 5px 0px rgba(0, 0, 0, 0.2)`,

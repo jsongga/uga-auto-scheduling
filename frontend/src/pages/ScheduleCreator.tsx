@@ -80,13 +80,13 @@ export default function ScheduleCreator() {
   const [classes, setClasses] = useState(["Loading courses..."]);
   const [classesShort, setClassesShort] = useState(["Loading courses..."]);
   const [schedule, setSchedule] = useReducer(scheduleReducer, [
-    { options: [1], mustTake: false, priority: 0, uid: generateUID() },
-    { options: [2], mustTake: false, priority: 1, uid: generateUID() },
-    { options: [3], mustTake: false, priority: 2, uid: generateUID() },
+    { options: [], mustTake: false, priority: 0, uid: generateUID() },
+    { options: [], mustTake: false, priority: 1, uid: generateUID() },
+    { options: [], mustTake: false, priority: 2, uid: generateUID() },
   ]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/courses")
+    fetch("http://127.0.0.1:8080/courses")
       .then((res) => res.json())
       .then((data) => {
         setClasses(
@@ -103,11 +103,13 @@ export default function ScheduleCreator() {
   }, []);
 
   const submitSchedule = () => {
+    console.log(`Submitting schedule: ${JSON.stringify(schedule)}`);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(schedule),
     };
+    console.log(requestOptions.body);
     fetch("http://localhost:8080/scheduling", requestOptions)
       .then((res) => res.json())
       .then((data) => {
