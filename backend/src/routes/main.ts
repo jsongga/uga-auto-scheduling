@@ -1,6 +1,7 @@
 import { Router } from "express";
 import fs from "fs";
 import path from "path";
+import { createSchedule } from "../scripts/algorithm.js";
 
 export const defaultRoute = Router();
 
@@ -25,8 +26,32 @@ defaultRoute.get("/courses", (req, res) => {
   );
 });
 
+export type Choices = {
+  options: string[];
+  mustTake: boolean;
+  priority: number;
+  uid: number;
+};
+
 defaultRoute.post("/scheduling", (req, res) => {
-  console.log(req.body);
+  const newResult: string[][] = (req.body as Choices[]).map(
+    (course: Choices) => {
+      return course.options.map((option) => {
+        if (option.startsWith("CRN:")) return option;
+        else
+          return (
+            option.substring(0, option.indexOf(" ")) +
+            option.substring(option.indexOf(" ") + 1, option.length)
+          );
+      });
+    },
+  );
+
+  // console.log(JSON.stringify(newResult));
+
+  const schedule = createSchedule(newResult);
+
+  console.log(schedule);
 
   res.json({ message: "Got it!" });
 });
