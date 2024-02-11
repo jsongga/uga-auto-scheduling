@@ -1,41 +1,63 @@
 import fs from "fs";
-import fetchWalkingDistance from "./fetchWalkingDistance";
 
 let professors;
 let courses;
 let buildings;
 
 try {
-	const professorsData = fs.readFileSync("./src/ugaProfessors.json", "utf8");
-	professors = JSON.parse(professorsData);
+  const professorsData = fs.readFileSync("./src/ugaProfessors.json", "utf8");
+  professors = JSON.parse(professorsData);
 
-	const coursesData = fs.readFileSync("./src/courses.json", "utf8");
-	courses = JSON.parse(coursesData);
+  const coursesData = fs.readFileSync("./src/courses.json", "utf8");
+  courses = JSON.parse(coursesData);
 
     const buildingsData = fs.readFileSync("./src/buildings.json", "utf8")
-    buildings = JSON.parse(buildingsData)
-
+    buildings = JSON.parse(buildingsData);\
 } catch (err) {
-	console.error(err);
+  console.error(err);
 }
 
 export class Professor {
-	constructor(firstName, lastName, rating) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.rating = rating;
-	}
+  constructor(firstName, lastName, rating) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.rating = rating;
+  }
 
 	output() {
-		console.log(
-			"Professor Name: " + this.firstName + " " + this.lastName + "\n"
-		);
+		console.log("/Professor Name: " + this.fname + this.lname + "\n");
 		console.log("Rating: " + this.rating);
 	}
 }
 
+// export function findProfessor(professor) {
+//   // Input: one string
+//   let pos = professor.split(" ");
+//   let fname = pos[0];
+//   let finitial = fname[0];
+//   let lname = pos[1];
+//   for (let i = 2; i < pos.length; i++) {
+//     lname += " " + pos[i];
+//   }
+//
+//   let finitiallname = finitial + " " + lname;
+//   fs.readFile("./src/ugaProfessors.json", "utf8", (err, data) => {
+//     if (err) {
+//       console.error(err);
+//     }
+//
+//     let obj = JSON.parse(data);
+//     // console.log(obj)
+//
+//     if (obj[finitiallname] !== undefined) {
+//       // console.log(obj[finitiallname])
+//       let curObj = obj[finitiallname];
+//       return new Professor(curObj.firstName, curObj.lastName, curObj.avgRating);
+//     }
+//   });
+// }
+
 export function findProfessor(professor) {
-	console.log(professor);
 	// Input: one string
 	let pos = professor.split(" ");
 	let fname = pos[0];
@@ -46,70 +68,87 @@ export function findProfessor(professor) {
 	}
 
 	let finitiallname = finitial + " " + lname;
+	fs.readFile("./src/ugaProfessors.json", "utf8", (err, data) => {
+		if (err) {
+			console.error(err);
+		}
 
-	if (professors[finitiallname] !== undefined) {
-		let curObj = professors[finitiallname];
-		return new Professor(
-			curObj.firstName,
-			curObj.lastName,
-			curObj.avgRating
-		);
-	}
-	return new Professor("Unknown", "Unknown", 0);
+		let obj = JSON.parse(data);
+		// console.log(obj)
+
+		if (obj[finitiallname] !== undefined) {
+			// console.log(obj[finitiallname])
+			let curObj = obj[finitiallname];
+			return new Professor(
+				curObj.firstName,
+				curObj.lastName,
+				curObj.avgRating
+			);
+		}
+	});
 }
 
 export function getClass(crn) {
 	let finalResult = [];
+	fs.readFile("./src/courses.json", "utf8", (err, data) => {
+		if (err) {
+			console.error(err);
+		}
 
-	let objList = Object.values(courses);
-	finalResult = objList.filter((c) => crn == c.crn);
+		let obj = JSON.parse(data);
+		// console.log(obj)
 
-	if (finalResult.length == 0) {
-		return "No class found";
-	}
+		let objList = Object.values(obj);
 
+		const result = objList.filter((c) => crn == c.crn);
+
+		// console.log(result)
+
+		finalResult = result;
+		//type array
+	});
 	return finalResult;
 }
 
 export function getAllClass(classNum) {
-    // this should return a list of CRNs
-	let finalResult = [];
+  // this should return a list of CRNs
+  let finalResult = [];
 
-	let objList = Object.values(courses);
-	finalResult = objList.filter((c) => classNum == c.courseNumber);
+  let objList = Object.values(courses);
+  finalResult = objList.filter((c) => classNum == c.courseNumber);
 
-	if (finalResult.length == 0) {
-		return "No class found";
-	}
+  if (finalResult.length == 0) {
+    return "No class found";
+  }
 
-    let final = [];
+  let final = [];
 
-    for (let i = 0 ; i < finalResult.length ; i++) {
-        if (i != 0 && finalResult[i].crn == finalResult[i - 1].crn) continue;
-        final.push(finalResult[i].crn);
-    }
+  for (let i = 0; i < finalResult.length; i++) {
+    if (i != 0 && finalResult[i].crn == finalResult[i - 1].crn) continue;
+    final.push(finalResult[i].crn);
+  }
 
-	return final;
+  console.log(final);
+
+  return final;
 }
 
 // Define the class structure
 export class Class {
 	constructor(crn, numGroup = 0) {
 		let result = getClass(crn);
-		//console.log(typeof result);
-        //console.log(result[0].courseNumber)
+		console.log(typeof result);
 		this.courseNumber = result[0].courseNumber;
-		//console.log(this.courseNumber);
 		this.courseName = result[0].courseName;
 		this.crn = crn;
         this.group = numGroup;
+        this.instructor = result[0].instructor;
 		this.professor = findProfessor(result[0].instructor);
 		this.startTime = [0, 0, 0, 0, 0];
 		this.endTime = [0, 0, 0, 0, 0];
 		this.location = ["", "", "", "", ""]; // string
 		this.rooms = [0, 0, 0, 0, 0];
 		this.seats = result[0].seatsAvailable;
-
 		for (let i = 0; i < result.length; i++) {
 			for (let j = 0; j < result[i].days.length; j++) {
 				let id = 0;
@@ -154,26 +193,16 @@ export class Class {
 
 // find location of a building from the buildings.json file
 export function findBuilding(building) {
-    console.log(building)
-    console.log(buildings[building])
-    return buildings[building]
+  console.log(building);
+  console.log(buildings[building]);
+  return buildings[building];
 }
-
 
 // Define the Schedule structure
 export class Schedule {
 	constructor(classes) {
+		this.classes = classes;
 		this.numClasses = classes.length;
-        this.classes = []
-        for(let i = 0 ; i < this.numClasses ; i++) {
-            this.classes.push(classes[i])
-        }
-        /*
-        console.log("Schedule")
-        for (let i = 0 ; i < this.numClasses ; i++) {
-            console.log(this.classes[i].crn);
-        }
-        */
 		// write later
 		this.totalTimeOnCampus = 0;
         this.totalDaysOnCampus = 0;
@@ -224,15 +253,11 @@ export class Schedule {
         for (let i = 0 ; i < this.numClasses ; i++) {
             console.log(this.classes[i].crn)
         }
-        console.log("AvgRating = " + this.avgProfessorRating);
-        console.log("Total time on campus " + this.totalTimeOnCampus);
-        console.log("Total days on campus " + this.totalDaysOnCampus);
-        // console.log("Total walking distance " + this.totalDistance);
     }
 }
 // Function to check overlapping
 function overlapping(a1, b1, a2, b2) {
-	let _a;
+	var _a;
 	if (a1 > a2) {
 		(_a = [a2, a1]), (a1 = _a[0]), (a2 = _a[1]);
 	}
@@ -243,7 +268,7 @@ function overlapping(a1, b1, a2, b2) {
 }
 // Function to check if there's a conflict in time with the current class
 function ConflictTime(classX, classY) {
-	for (let i = 0; i < 5; i++) {
+	for (var i = 0; i < 5; i++) {
 		if (classX.startTime[i] == 0 || classY.startTime[i] == 0) continue;
 		if (
 			overlapping(
@@ -257,27 +282,25 @@ function ConflictTime(classX, classY) {
 	}
 	return false;
 }
-let curSchedule = [];
-let ClassGroups = [];
-let schedules = [];
+var curSchedule = [];
+var ClassGroups;
+var schedules;
 // Check if class can be pushed in
 function pushable(classX) {
-	for (let i = 0; i < curSchedule.length; i++) {
+	for (var i = 0; i < curSchedule.length; i++) {
 		if (ConflictTime(classX, curSchedule[i])) return false;
 	}
 	return true;
 }
 // Function to make schedule
 function makeSchedule(i) {
-    // console.log(i)
 	if (i == ClassGroups.length) {
 		schedules.push(new Schedule(curSchedule));
-        return;
 	}
 	let numClasses = ClassGroups[i].length;
 	for (let j = 0; j < numClasses; j++) {
 		let classX = ClassGroups[i][j];
-        //console.log(typeof(classX))
+		console.log(classX instanceof Class);
 		if (pushable(classX)) {
 			curSchedule.push(classX);
 			makeSchedule(i + 1);
@@ -287,13 +310,13 @@ function makeSchedule(i) {
 }
 
 function bestRMPSchedule() {
-    let bestSchedule = schedules[0]
-    for (let i = 1 ; i < schedules.length ; i++) {
-        if(schedules[i].avgProfessorRating > bestSchedule.avgProfessorRating) {
-            bestSchedule = schedules[i];
-        }
+  let bestSchedule = schedules[0];
+  for (let i = 1; i < schedules.length; i++) {
+    if (schedules[i].avgProfessorRating > bestSchedule.avgProfessorRating) {
+      bestSchedule = schedules[i];
     }
-    return bestSchedule
+  }
+  return bestSchedule;
 }
 
 function addClassCRN(crns) {
@@ -350,14 +373,14 @@ export function req(requests) {
             console.log('\t\t\"' + "Number Of Days On Campus" + '\": ' + schedules[i].totalDaysOnCampus)
             console.log('\t\t\"' + "Total Walking Distance" + '\": ' + schedules[i].totalDistance)
             console.log('\t\t\"' + "Classes CRNs" + '\": [') // open [
-
+                
                 for(let j = 0 ; j < schedules[i].classNum ; j++) {
                     if(j == schedules[i].classNum - 1) {
                         console.log('\t\t\t' + toString(schedules[i].classes[j].crn));
                     }
                     else console.log('\t\t\t' + toString(schedules[i].classes[j].crn) + ',');
                 }
-
+            
             console.log('\t\t\]') // close ]
         console.log('\t},')
     }
@@ -403,3 +426,4 @@ export function main() {
     
     
 }
+*/
