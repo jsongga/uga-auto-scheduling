@@ -51,9 +51,9 @@ defaultRoute.post("/scheduling", (req, res) => {
 
   const schedule = createSchedule(newResult);
 
-  console.log(schedule);
+  // console.log(JSON.stringify(schedule));
 
-  res.json({ message: "Got it!" });
+  res.json(schedule);
 });
 
-createSchedule([["CSCI1302"]]);
+// createSchedule([["CSCI1302"]]);
