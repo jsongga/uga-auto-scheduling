@@ -109,30 +109,46 @@ export default function Landing() {
       <StyledSheet2 ref={myRef}>
         <Grid container>
           <Grid md={6} xs={12}>
-            <Card>
+            <StyledInfo>
               <Typography level={"h3"}>Rate My Professor</Typography>
               Scrapes over 5000 professor ratings from Rate My Professor and
               saves it to a localized database.
-            </Card>
+            </StyledInfo>
           </Grid>
           <Grid md={6} xs={12}>
-            <Card>
+            <StyledInfo>
               <Typography level={"h3"}>Google Maps API</Typography>
               Confirms class locations are close enough to each other to walk
               between during the day.
-            </Card>
+            </StyledInfo>
           </Grid>
           <Grid md={6} xs={12}>
-            <Card>Course Catalog</Card>
+            <StyledInfo>
+              <Typography level={"h3"}>Automated Scheduling</Typography>
+              Uses a complex algorithm to find the best schedule for you.
+            </StyledInfo>
           </Grid>
           <Grid md={6} xs={12}>
-            <Card>Automated Scheduling</Card>
+            <StyledInfo>
+              <Typography level={"h3"}>Easy to Use</Typography>
+              Just sign up, and we'll do the rest.
+            </StyledInfo>
+          </Grid>
+          <Grid md={6} xs={12}>
+            <StyledInfo>
+              <Typography level={"h3"}>Responsive Across Devices</Typography>
+              Use scheduler on your phone, tablet, or computer.
+            </StyledInfo>
           </Grid>
         </Grid>
       </StyledSheet2>
     </Box>
   );
 }
+const StyledInfo = styled(Card)`
+  //max-width: 20vw;
+  margin: 40px;
+`;
 
 const StyledSheet1 = styled(Box)`
   background-color: #ecebe9;
