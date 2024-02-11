@@ -2,6 +2,7 @@ import fs from "fs";
 
 let professors;
 let courses;
+let buildings
 
 try {
 	const professorsData = fs.readFileSync("./src/ugaProfessors.json", "utf8");
@@ -9,6 +10,9 @@ try {
 
 	const coursesData = fs.readFileSync("./src/courses.json", "utf8");
 	courses = JSON.parse(coursesData);
+
+    const buildingsData = fs.readFileSync("./src/buildings.json", "utf8")
+    buildings = JSON.parse(buildingsData);
 } catch (err) {
 	console.error(err);
 }
@@ -109,6 +113,7 @@ export class Class {
 		this.courseName = result[0].courseName;
 		this.crn = crn;
         this.group = numGroup;
+        this.instructor = result[0].instructor;
 		this.professor = findProfessor(result[0].instructor);
 		this.startTime = [0, 0, 0, 0, 0];
 		this.endTime = [0, 0, 0, 0, 0];
@@ -152,7 +157,7 @@ export class Class {
 		}
 		console.log("Course Location:\n");
 		for (let i = 0; i < 5; i++) {
-			console.log(this.location[i] + " " + this.room[i] + "\n");
+			console.log(this.location[i] + " " + this.rooms[i] + "\n");
 		}
 	}
 }
@@ -286,6 +291,52 @@ function bestRMPSchedule() {
     return bestSchedule
 }
 
+export function req(requests) {
+    for(let t = 0 ; t < requests.length ; t++) {
+        let request = requests[t];
+        let tmp = [];
+        for (let i = 0 ; i < request.length ; i++) {
+            let pos = request.split(' ')
+            if(pos[0].substring(0, 3) == 'CRN') {
+                let num = parseInt(pos[1])
+                tmp.push(new Class(num));
+            }
+            else {
+                let arr = getAllClass(request)
+                for(let j = 0 ; j < arr.length ; j++) {
+                    let num = arr[j]
+                    tmp.push(new Class(num));
+                }
+            }
+        }
+    }
+    ClassGroups.push(tmp)
+    makeSchedule(0)
+    // printing the output: json
+    console.log('{')
+    for(let i = 0 ; i < schedules.length ; i++) {
+        console.log('\t\"' + toString(i) + '\": {') // open {
+            console.log('\t\t\"' + "Average Professor Rating" + '\": ' + schedules[i].avgProfessorRating)
+            console.log('\t\t\"' + "Total Time On Campus (Minutes)" + '\": ' + schedules[i].totalTimeOnCampus)
+            console.log('\t\t\"' + "Number Of Days On Campus" + '\": ' + schedules[i].totalDaysOnCampus)
+            console.log('\t\t\"' + "Total Walking Distance" + '\": ' + schedules[i].totalDistance)
+            console.log('\t\t\"' + "Classes CRNs" + '\": [') // open [
+                
+                for(let j = 0 ; j < schedules[i].classNum ; j++) {
+                    if(j == schedules[i].classNum - 1) {
+                        console.log('\t\t\t' + toString(schedules[i].classes[j].crn));
+                    }
+                    else console.log('\t\t\t' + toString(schedules[i].classes[j].crn) + ',');
+                }
+            
+            console.log('\t\t\]') // close ]
+        console.log('\t},')
+    }
+    console.log('}')
+
+}
+
+/*
 export function main() {
     // CSCI 1302
     ClassGroups.push([new Class(26245), 
@@ -319,3 +370,4 @@ export function main() {
     
     
 }
+*/
