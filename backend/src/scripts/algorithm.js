@@ -3,6 +3,7 @@ import { get } from "http";
 
 let professors;
 let courses;
+let buildings;
 
 try {
 	const professorsData = fs.readFileSync("./src/ugaProfessors.json", "utf8");
@@ -10,6 +11,10 @@ try {
 
 	const coursesData = fs.readFileSync("./src/courses.json", "utf8");
 	courses = JSON.parse(coursesData);
+
+    const buildingsData = fs.readFileSync("./src/buildings.json", "utf8")
+    buildings = JSON.parse(buildingsData)
+
 } catch (err) {
 	console.error(err);
 }
@@ -22,12 +27,15 @@ export class Professor {
 	}
 
 	output() {
-		console.log("Professor Name: " + this.fname + this.lname + "\n");
+		console.log(
+			"Professor Name: " + this.firstName + " " + this.lastName + "\n"
+		);
 		console.log("Rating: " + this.rating);
 	}
 }
 
 export function findProfessor(professor) {
+	console.log(professor);
 	// Input: one string
 	let pos = professor.split(" ");
 	let fname = pos[0];
@@ -38,45 +46,28 @@ export function findProfessor(professor) {
 	}
 
 	let finitiallname = finitial + " " + lname;
-	fs.readFile("./src/ugaProfessors.json", "utf8", (err, data) => {
-		if (err) {
-			console.error(err);
-		}
 
-		let obj = JSON.parse(data);
-		// console.log(obj)
-
-		if (obj[finitiallname] !== undefined) {
-			// console.log(obj[finitiallname])
-			let curObj = obj[finitiallname];
-			return new Professor(
-				curObj.firstName,
-				curObj.lastName,
-				curObj.avgRating
-			);
-		}
-	});
+	if (professors[finitiallname] !== undefined) {
+		let curObj = professors[finitiallname];
+		return new Professor(
+			curObj.firstName,
+			curObj.lastName,
+			curObj.avgRating
+		);
+	}
+	return new Professor("Unknown", "Unknown", 0);
 }
 
 export function getClass(crn) {
 	let finalResult = [];
-	fs.readFile("./src/courses.json", "utf8", (err, data) => {
-		if (err) {
-			console.error(err);
-		}
 
-		let obj = JSON.parse(data);
-		// console.log(obj)
+	let objList = Object.values(courses);
+	finalResult = objList.filter((c) => crn == c.crn);
 
-		let objList = Object.values(obj);
+	if (finalResult.length == 0) {
+		return "No class found";
+	}
 
-		const result = objList.filter((c) => crn == c.crn);
-
-		// console.log(result)
-
-		finalResult = result;
-		//type array
-	});
 	return finalResult;
 }
 
@@ -105,8 +96,10 @@ export function getAllClass(classNum) {
 export class Class {
 	constructor(crn, numGroup = 0) {
 		let result = getClass(crn);
-		console.log(typeof result);
+		//console.log(typeof result);
+        //console.log(result[0].courseNumber)
 		this.courseNumber = result[0].courseNumber;
+		//console.log(this.courseNumber);
 		this.courseName = result[0].courseName;
 		this.crn = crn;
 		this.group = numGroup;
@@ -116,6 +109,7 @@ export class Class {
 		this.location = ["", "", "", "", ""]; // string
 		this.rooms = [0, 0, 0, 0, 0];
 		this.seats = result[0].seatsAvailable;
+
 		for (let i = 0; i < result.length; i++) {
 			for (let j = 0; j < result[i].days.length; j++) {
 				let id = 0;
@@ -153,7 +147,7 @@ export class Class {
 		}
 		console.log("Course Location:\n");
 		for (let i = 0; i < 5; i++) {
-			console.log(this.location[i] + " " + this.room[i] + "\n");
+			console.log(this.location[i] + " " + this.rooms[i] + "\n");
 		}
 	}
 }
@@ -168,8 +162,17 @@ export function findBuilding(building) {
 // Define the Schedule structure
 export class Schedule {
 	constructor(classes) {
-		this.classes = classes;
 		this.numClasses = classes.length;
+        this.classes = []
+        for(let i = 0 ; i < this.numClasses ; i++) {
+            this.classes.push(classes[i])
+        }
+        /*
+        console.log("Schedule")
+        for (let i = 0 ; i < this.numClasses ; i++) {
+            console.log(this.classes[i].crn);
+        }
+        */
 		// write later
 		this.totalTimeOnCampus = 0;
 		this.totalDaysOnCampus = 0;
@@ -224,7 +227,7 @@ export class Schedule {
 }
 // Function to check overlapping
 function overlapping(a1, b1, a2, b2) {
-	var _a;
+	let _a;
 	if (a1 > a2) {
 		(_a = [a2, a1]), (a1 = _a[0]), (a2 = _a[1]);
 	}
@@ -235,7 +238,7 @@ function overlapping(a1, b1, a2, b2) {
 }
 // Function to check if there's a conflict in time with the current class
 function ConflictTime(classX, classY) {
-	for (var i = 0; i < 5; i++) {
+	for (let i = 0; i < 5; i++) {
 		if (classX.startTime[i] == 0 || classY.startTime[i] == 0) continue;
 		if (
 			overlapping(
@@ -249,25 +252,27 @@ function ConflictTime(classX, classY) {
 	}
 	return false;
 }
-var curSchedule = [];
-var ClassGroups;
-var schedules;
+let curSchedule = [];
+let ClassGroups = [];
+let schedules = [];
 // Check if class can be pushed in
 function pushable(classX) {
-	for (var i = 0; i < curSchedule.length; i++) {
+	for (let i = 0; i < curSchedule.length; i++) {
 		if (ConflictTime(classX, curSchedule[i])) return false;
 	}
 	return true;
 }
 // Function to make schedule
 function makeSchedule(i) {
+    // console.log(i)
 	if (i == ClassGroups.length) {
 		schedules.push(new Schedule(curSchedule));
+        return;
 	}
 	let numClasses = ClassGroups[i].length;
 	for (let j = 0; j < numClasses; j++) {
 		let classX = ClassGroups[i][j];
-		console.log(classX instanceof Class);
+        //console.log(typeof(classX))
 		if (pushable(classX)) {
 			curSchedule.push(classX);
 			makeSchedule(i + 1);
@@ -287,6 +292,43 @@ function bestRMPSchedule() {
 }
 
 export function main() {
+    let result1 = getAllClass('CSCI1302')
+    console.log(result1)
+    //let result2 = getAllClassProf('CSCI1302', 'Bradley Barnes')
+    //console.log(result2)
+    
+    // CSCI 1302
+    ClassGroups.push([new Class(26245), 
+                    new Class(26311), 
+                    new Class(36424), 
+                    new Class(64229), 
+                    new Class(69400)])
+    // CSCI 2610
+    ClassGroups.push([new Class(26368), 
+                    new Class(26372),  
+                    new Class(43005), 
+                    new Class(64228)])
+    // PHYS 1112
+    ClassGroups.push([new Class(27133), 
+                    new Class(27144), 
+                    new Class(27150), 
+                    new Class(45173)])
+    // ENGL 1101
+    ClassGroups.push([new Class(27603), 
+                    new Class(27662), 
+                    new Class(27667), 
+                    new Class(27670)])
+
+    makeSchedule(0)
+
+    console.log(schedules.length)
+
+    for(let i = 0 ; i < schedules.length ; i++) {
+        schedules[i].output()
+    }
+    
+    
+}
 	// CSCI 1302
 	ClassGroups.push([
 		new Class(26245),

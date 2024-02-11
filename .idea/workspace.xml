@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Removed filler values from ScheduleCreator.tsx">
+    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="semi-fixed code">
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/index.ts" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/main.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/main.ts" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package-lock.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package.json" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="41261" />
+    <option name="totalTimeSeconds" value="47271" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -69,6 +70,7 @@
       <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/public" />
       <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop" />
     </key>
   </component>
@@ -125,7 +127,7 @@
       <updated>1707523782440</updated>
       <workItem from="1707523783662" duration="8426000" />
       <workItem from="1707540081200" duration="37612000" />
-      <workItem from="1707622756192" duration="1111000" />
+      <workItem from="1707622756192" duration="7286000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Project Setup">
       <option name="closed" value="true" />
@@ -215,7 +217,31 @@
       <option name="project" value="LOCAL" />
       <updated>1707623708346</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="example of input and output from post request">
+      <option name="closed" value="true" />
+      <created>1707623894220</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707623894220</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Changed site icon and name">
+      <option name="closed" value="true" />
+      <created>1707625308180</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1707625308180</updated>
+    </task>
+    <task id="LOCAL-00014" summary="semi-fixed code">
+      <option name="closed" value="true" />
+      <created>1707629223154</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707629223154</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +270,9 @@
     <MESSAGE value="Updated the ScheduleCreator.tsx" />
     <MESSAGE value="Added method to post and recieve between frontend and backend the scheduling info" />
     <MESSAGE value="Removed filler values from ScheduleCreator.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed filler values from ScheduleCreator.tsx" />
+    <MESSAGE value="example of input and output from post request" />
+    <MESSAGE value="Changed site icon and name" />
+    <MESSAGE value="semi-fixed code" />
+    <option name="LAST_COMMIT_MESSAGE" value="semi-fixed code" />
   </component>
 </project>
