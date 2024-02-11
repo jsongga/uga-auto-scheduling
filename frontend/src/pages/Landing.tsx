@@ -12,6 +12,7 @@ import {
 } from "@mui/joy";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Landing() {
   const myRef = useRef(null);
@@ -22,13 +23,24 @@ export default function Landing() {
   const goToSignup = () => navigate("/signup");
   const goToLogin = () => navigate("/login");
 
+
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+
+  const onLoginClick = () => {
+    if (isAuthenticated) {
+      navigate("/scheduler");
+    } else {
+      loginWithRedirect();
+    }
+  }
+  
   return (
     <Box>
       <StyledSheet1>
         <Stack>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <AppName level={"h1"}>Scheduler</AppName>
-            <Button variant={"plain"} onClick={goToLogin} sx={{ margin: 3 }}>
+            <Button variant={"plain"} onClick={onLoginClick} sx={{ margin: 3 }}>
               Login
             </Button>
           </Stack>

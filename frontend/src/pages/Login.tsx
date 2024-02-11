@@ -5,14 +5,12 @@ import { useEffect } from "react";
 export default function Login() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 
-  const navigate = useNavigate();
-  
-
   useEffect(() => {
-  if (isAuthenticated) {
-    navigate("/scheduler");
-  }}, [isAuthenticated]);
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isAuthenticated, loginWithRedirect]);
 
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  return null;
 }
 
