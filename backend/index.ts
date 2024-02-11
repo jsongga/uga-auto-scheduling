@@ -14,6 +14,7 @@ const port = 8080;
 
 import { routes } from "./src/routes/index.ts";
 import fetchWalkingDistance from "./src/scripts/fetchWalkingDistance.js";
+
 const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true

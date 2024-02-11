@@ -30,6 +30,12 @@ declare module "@mui/joy/styles" {
   }
 }
 
+const domain = "dev-hngcj4gnq03d0dw2.us.auth0.com";
+const clientId = "zY5pzNXnlxSpC2YaDByP9pGzClDW5x8A";
+
+import { Auth0Provider } from '@auth0/auth0-react';
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -146,8 +152,20 @@ const myTheme = extendTheme({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+
     <CssVarsProvider theme={myTheme}>
       <RouterProvider router={router} />
     </CssVarsProvider>
   </React.StrictMode>,
 );
+
+<Auth0Provider
+domain={domain}
+clientId={clientId}
+authorizationParams={{
+  redirect_uri: window.location.origin
+}}
+>
+{/*<Landing />*/}
+<RouterProvider router={router} />
+</Auth0Provider>
