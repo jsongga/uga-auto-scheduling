@@ -103,7 +103,16 @@ export default function ScheduleCreator() {
   }, []);
 
   const submitSchedule = () => {
-    console.log(schedule);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(schedule),
+    };
+    fetch("http://localhost:8080/scheduling", requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (

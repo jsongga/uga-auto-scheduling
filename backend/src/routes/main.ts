@@ -9,19 +9,23 @@ defaultRoute.get("/", (req, res) => {
 });
 
 defaultRoute.get("/courses", (req, res) => {
+  fs.readFile(
+    path.join(__dirname, "../classTags.json"),
+    "utf8",
+    (err, data) => {
+      if (err) {
+        console.error(err);
+        return res.sendStatus(500);
+      }
 
-  fs.readFile(path.join(__dirname, '../classTags.json'), 'utf8', (err, data) => {
-    if (err) {
-      console.error(err);
-      return res.sendStatus(500);
-    }
+      const classes = JSON.parse(data);
 
-    const classes = JSON.parse(data);
-    
-    res.json(classes);
-  });
-
-
+      res.json(classes);
+    },
+  );
 });
 
-
+defaultRoute.post("/scheduling", (req, res) => {
+  console.log(req.body);
+  res.json({ message: "Got it!" });
+});
