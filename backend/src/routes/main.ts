@@ -26,8 +26,7 @@ defaultRoute.get("/courses", (req, res) => {
 });
 
 defaultRoute.post("/scheduling", (req, res) => {
-  const { classes, schedule } = req.body;
-  console.log(classes, schedule, req.body);
+  console.log(req.body);
 
   res.json({ message: "Got it!" });
 });

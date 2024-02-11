@@ -30,6 +30,8 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });
 
+app.use(express.json());
+
 app.use("/", routes);
 
 // fs.readFile("./src/buildings.json", "utf8", (err, data) => {
