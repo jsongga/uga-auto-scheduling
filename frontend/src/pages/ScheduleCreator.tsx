@@ -1,7 +1,19 @@
 import { useEffect, useReducer, useState } from "react";
 import { Reorder } from "../components/dragdrop/Reorder.tsx";
-import { Button, Container, Stack, Typography } from "@mui/joy";
-import { generateUID } from "../utils.ts";
+import {
+  Box,
+  Button,
+  Card,
+  Chip,
+  Container,
+  Grid,
+  Stack,
+  styled,
+  Typography,
+} from "@mui/joy";
+import Paper from "@mui/material/Paper";
+import { convertToTTime, generateUID } from "../utils.ts";
+import Build from "./Build.tsx";
 
 function scheduleReducer(state: any, action: any) {
   console.log(state);
@@ -63,6 +75,8 @@ function scheduleReducer(state: any, action: any) {
           }
         })
         .sort((a: Schedule, b: Schedule) => a.priority - b.priority); // Sort the array based on priority after shifting
+    case "all":
+      return action.schedule;
     default:
       console.log(action);
       return state;
@@ -76,6 +90,34 @@ export type Schedule = {
   uid: number;
 };
 
+export type Professor = {
+  firstName: string;
+  lastName: string;
+  rating: number;
+};
+
+export type Class = {
+  courseName: string;
+  courseNumber: string;
+  crn: number;
+  endTime: number[];
+  group: number;
+  location: string[];
+  professor: Professor;
+  rooms: string[];
+  seats: number;
+  startTime: number[];
+};
+
+export type Option = {
+  avgProfessorRating: number;
+  classes: Class[];
+  numClasses: number;
+  totalDaysOnCampus: number;
+  totalDistance: number;
+  totalTimeOnCampus: number;
+};
+
 export default function ScheduleCreator() {
   const [classes, setClasses] = useState(["Loading courses..."]);
   const [classesShort, setClassesShort] = useState(["Loading courses..."]);
@@ -84,6 +126,24 @@ export default function ScheduleCreator() {
     { options: [], mustTake: false, priority: 1, uid: generateUID() },
     { options: [], mustTake: false, priority: 2, uid: generateUID() },
   ]);
+  const [scheduleOptions, setScheduleOptions] = useState<Option[]>([]);
+  const [optionID, setOptionID] = useState(0);
+  const [gotOptions, setGotOptions] = useState(false);
+
+  useEffect(() => {
+    // Load the state from localStorage when the component mounts
+    const savedSchedule = localStorage.getItem("schedule");
+    if (savedSchedule) {
+      setSchedule({ type: "all", schedule: JSON.parse(savedSchedule) });
+    }
+    setGotOptions(true);
+  }, []);
+
+  useEffect(() => {
+    if (!gotOptions) return;
+    // Save the state to localStorage whenever it changes
+    localStorage.setItem("schedule", JSON.stringify(schedule));
+  }, [schedule, gotOptions]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8080/courses")
@@ -114,10 +174,113 @@ export default function ScheduleCreator() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        setScheduleOptions(data);
       });
   };
 
-  return (
+  return scheduleOptions.length > 0 ? (
+    <Box p={2}>
+      <Grid container>
+        <Grid xs={12} md={3}>
+          <Stack gap={1} alignItems={"center"}>
+            <Typography level={"h3"}>All Schedules</Typography>
+            <Stack direction={"row"} gap={2}>
+              <Button variant={"plain"}>Sort by Rating</Button>
+              <Button variant={"plain"}>Sort by Campus Days</Button>
+              <Button variant={"plain"}>Sort by Time on Campus</Button>
+            </Stack>
+            {scheduleOptions.map((option: Option, index: number) => (
+              <StyledOption
+                onClick={() => {
+                  setOptionID(index);
+                }}
+              >
+                <Stack
+                  direction={"row"}
+                  justifyContent={"space-between"}
+                  flexWrap="wrap"
+                  gap={1}
+                >
+                  <Chip>
+                    Rating: {option.avgProfessorRating.toPrecision(2)}
+                  </Chip>
+                  <Chip>Days on Campus: {option.totalDaysOnCampus}</Chip>
+                  <Chip>
+                    Time on Campus: {Math.floor(option.totalTimeOnCampus / 60)}:
+                    {option.totalTimeOnCampus % 60}
+                  </Chip>
+                </Stack>
+              </StyledOption>
+            ))}
+          </Stack>
+        </Grid>
+        <Grid xs={12} md={9}>
+          <Build
+            events={scheduleOptions[optionID].classes.flatMap(
+              (course: Class) => {
+                const starts = convertToTTime(course.startTime);
+                const ends = convertToTTime(course.endTime);
+
+                let schedules = [];
+
+                for (let i = 0; i < course.location.length; i++) {
+                  if (course.location[i] === "") continue;
+                  schedules.push({
+                    title: `${course.courseName} (${course.courseNumber})`,
+                    start: starts[i],
+                    end: ends[i],
+                    extendedProps: {
+                      description:
+                        course.professor.firstName +
+                        " " +
+                        course.professor.lastName,
+                      description2: course.location[i],
+                      description3: course.rooms[i],
+                      // description4: course.description,
+                    },
+                  });
+                }
+
+                return schedules;
+
+                // return [
+                //   {
+                //     title: `${course.courseName} ${course.courseNumber}`,
+                //     start: `2024-02-06T${course.startTime[0]}:${course.startTime[1]}:00`,
+                //     end: `2024-02-06T${course.endTime[0]}:${course.endTime[1]}:00`,
+                //     extendedProps: {
+                //       description:
+                //         course.professor.firstName + " " + course.professor.lastName,
+                //     },
+                //   },
+                // ];
+              },
+            )}
+          />
+          <Stack direction={"row"} justifyContent={"space-around"}>
+            <Button onClick={() => setScheduleOptions([])}>Go Back</Button>
+            <Button
+              onClick={() => {
+                setOptionID((optionID + 1) % scheduleOptions.length);
+              }}
+            >
+              View Next
+            </Button>
+            <Button
+              onClick={() => {
+                setOptionID(
+                  (optionID - 1 + scheduleOptions.length) %
+                    scheduleOptions.length,
+                );
+              }}
+            >
+              View Previous
+            </Button>
+          </Stack>
+        </Grid>
+      </Grid>
+    </Box>
+  ) : (
     <Container maxWidth={"md"}>
       <Stack alignItems={"center"}>
         <Typography level={"h3"} mt={8} mb={2}>
@@ -163,3 +326,12 @@ export default function ScheduleCreator() {
     </Container>
   );
 }
+
+const StyledOption = styled(Card)`
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+`;
