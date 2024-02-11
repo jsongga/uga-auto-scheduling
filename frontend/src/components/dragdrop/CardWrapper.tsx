@@ -3,6 +3,7 @@ import { FC, useEffect } from "react";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import SingleCard from "./SingleCard.tsx";
+import { Schedule } from "../../pages/ScheduleCreator.tsx";
 
 const ItemTypes = {
   CARD: "card",
@@ -22,6 +23,7 @@ export interface CardProps {
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
   options: string[];
+  details: Schedule;
 }
 
 interface DragItem {
@@ -32,10 +34,13 @@ interface DragItem {
 
 export default function CardWrapper(props: {
   id: any;
-  text: string[];
+  // text: string[];
   index: any;
   moveCard: any;
   options: string[];
+  details: Schedule;
+  setSchedule: any;
+  optionsShort: string[];
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop<
@@ -117,7 +122,12 @@ export default function CardWrapper(props: {
       style={{ opacity, backgroundColor: "transparent" }}
       data-handler-id={handlerId}
     >
-      <SingleCard options={props.options}>{props.text}</SingleCard>
+      <SingleCard
+        options={props.options}
+        optionsShort={props.optionsShort}
+        details={props.details}
+        setSchedule={props.setSchedule}
+      />
     </div>
   );
 }

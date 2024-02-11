@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Finished the ScheduleCreator page on the website">
+    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Created a state that manages all selected courses">
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/Users/johnsong/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/bun.lockb" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/bun.lockb" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/CardWrapper.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/CardWrapper.tsx" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/Reorder.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/Reorder.tsx" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/SingleCard.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop/SingleCard.tsx" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="28871" />
+    <option name="totalTimeSeconds" value="37640" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -75,7 +74,7 @@
       <recent name="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/dragdrop" />
     </key>
   </component>
-  <component name="RunManager" selected="Shell Script.Frontend">
+  <component name="RunManager" selected="npm.start">
     <configuration name="fetchWalkingDistance.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="/$PROJECT_DIR$/backend/src/scripts/fetchWalkingDistance.js" working-dir="/$PROJECT_DIR$/backend/src/scripts">
       <method v="2" />
     </configuration>
@@ -127,7 +126,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707523782440</updated>
       <workItem from="1707523783662" duration="8426000" />
-      <workItem from="1707540081200" duration="24326000" />
+      <workItem from="1707540081200" duration="34496000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Project Setup">
       <option name="closed" value="true" />
@@ -177,7 +176,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707583649700</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Updated UI">
+      <option name="closed" value="true" />
+      <created>1707602494250</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1707602494250</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Created a state that manages all selected courses">
+      <option name="closed" value="true" />
+      <created>1707616447531</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1707616447531</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +216,8 @@
     <MESSAGE value="Updated backend&#10;Created ScheduleCreator page&#10;Added eslint and prettier to backend&#10;Fixed run script for backend" />
     <MESSAGE value="Moved fetchWalkingDistance call to routes for testing&#10;Added Card Component for Drag and Drop" />
     <MESSAGE value="Finished the ScheduleCreator page on the website" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished the ScheduleCreator page on the website" />
+    <MESSAGE value="Updated UI" />
+    <MESSAGE value="Created a state that manages all selected courses" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a state that manages all selected courses" />
   </component>
 </project>
