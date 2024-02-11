@@ -1,8 +1,9 @@
 import type { Identifier, XYCoord } from "dnd-core";
-import type { FC } from "react";
+import { FC, useEffect } from "react";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import SingleCard from "./SingleCard.tsx";
+import { Schedule } from "../../pages/ScheduleCreator.tsx";
 
 const ItemTypes = {
   CARD: "card",
@@ -18,9 +19,11 @@ const ItemTypes = {
 
 export interface CardProps {
   id: any;
-  text: string;
+  text: string[];
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
+  options: string[];
+  details: Schedule;
 }
 
 interface DragItem {
@@ -29,7 +32,16 @@ interface DragItem {
   type: string;
 }
 
-export const CardWrapper: FC<CardProps> = ({ id, text, index, moveCard }) => {
+export default function CardWrapper(props: {
+  id: any;
+  // text: string[];
+  index: any;
+  moveCard: any;
+  options: string[];
+  details: Schedule;
+  setSchedule: any;
+  optionsShort: string[];
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop<
     DragItem,
@@ -47,7 +59,7 @@ export const CardWrapper: FC<CardProps> = ({ id, text, index, moveCard }) => {
         return;
       }
       const dragIndex = item.index;
-      const hoverIndex = index;
+      const hoverIndex = props.index;
 
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
@@ -82,7 +94,7 @@ export const CardWrapper: FC<CardProps> = ({ id, text, index, moveCard }) => {
       }
 
       // Time to actually perform the action
-      moveCard(dragIndex, hoverIndex);
+      props.moveCard(dragIndex, hoverIndex);
 
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
@@ -95,7 +107,7 @@ export const CardWrapper: FC<CardProps> = ({ id, text, index, moveCard }) => {
   const [{ isDragging }, drag] = useDrag({
     type: ItemTypes.CARD,
     item: () => {
-      return { id, index };
+      return { id: props.id, index: props.index };
     },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
@@ -110,7 +122,12 @@ export const CardWrapper: FC<CardProps> = ({ id, text, index, moveCard }) => {
       style={{ opacity, backgroundColor: "transparent" }}
       data-handler-id={handlerId}
     >
-      <SingleCard>{text}</SingleCard>
+      <SingleCard
+        options={props.options}
+        optionsShort={props.optionsShort}
+        details={props.details}
+        setSchedule={props.setSchedule}
+      />
     </div>
   );
-};
+}
