@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import Landing from "./pages/Landing.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Signup from "./pages/Signup.tsx";
+import RootTemplate from "./pages/RootTemplate.tsx";
+import NotFound from "./pages/NotFound.tsx";
+import Login from "./pages/Login.tsx";
+import Profile from "./pages/Profile.tsx";
+import ScheduleCreator from "./pages/ScheduleCreator.tsx";
+import AllTemplate from "./pages/AllTemplate.tsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AllTemplate />,
+    children: [
+    {
+      path: "/",
+      element: <Landing />,
+    },
+    {
+      path: "/signup",
+      element: <Signup />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
+    },
+    {
+      path: "/",
+      element: <RootTemplate />,
+      children: [
+        {
+          path: "/scheduler",
+          element: <ScheduleCreator />,
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+      ],
+    },
+  ]}
+]);
+
+export default function App() {
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <RouterProvider router={router} />)
 }
-
-export default App

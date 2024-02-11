@@ -3,6 +3,8 @@ import React from "react";
 
 const Profile = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
+
+    console.log(user, isAuthenticated, isLoading);
   
     if (isLoading) {
       return <div>Loading ...</div>;
@@ -14,7 +16,7 @@ const Profile = () => {
   
     return (
       <div>
-        <p>{user.email}</p>
+        <p>{JSON.stringify(user)}</p>
       </div>
     );
   };

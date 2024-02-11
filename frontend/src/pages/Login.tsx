@@ -1,13 +1,18 @@
-import { Button, Container, Input, Stack, styled } from "@mui/joy";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 export default function Login() {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+
+  const navigate = useNavigate();
+  
+
+  useEffect(() => {
+  if (isAuthenticated) {
+    navigate("/scheduler");
+  }}, [isAuthenticated]);
 
   return <button onClick={() => loginWithRedirect()}>Log In</button>;
 }
 
-const MainContent = styled(Stack)`
-  width: 100%;
-  height: 100%;
-`;

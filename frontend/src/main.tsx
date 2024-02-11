@@ -2,15 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import Landing from "./pages/Landing.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Signup from "./pages/Signup.tsx";
-import RootTemplate from "./pages/RootTemplate.tsx";
-import NotFound from "./pages/NotFound.tsx";
-import Login from "./pages/Login.tsx";
-import Logout from "./pages/Logout.tsx";
-import Profile from "./pages/Profile.tsx";
-import ScheduleCreator from "./pages/ScheduleCreator.tsx";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 // You can put this to any file that's included in your tsconfig
 import type { PaletteRange } from "@mui/joy/styles";
@@ -33,49 +24,6 @@ declare module "@mui/joy/styles" {
     triadic2: PaletteRange;
   }
 }
-
-const domain = "dev-hngcj4gnq03d0dw2.us.auth0.com";
-const clientId = "zY5pzNXnlxSpC2YaDByP9pGzClDW5x8A";
-
-import { Auth0Provider } from '@auth0/auth0-react';
-
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Landing />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/logout",
-    element: <Logout />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/",
-    element: <RootTemplate />,
-    children: [
-      {
-        path: "/scheduler",
-        element: <ScheduleCreator />,
-      },
-      {
-        path: "*",
-        element: <NotFound />,
-      },
-    ],
-  },
-]);
 
 const myTheme = extendTheme({
   fontFamily: {
@@ -162,18 +110,11 @@ const myTheme = extendTheme({
   },
 });
 
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-  <Auth0Provider
-  domain={domain}
-  clientId={clientId}
-  authorizationParams={{
-    redirect_uri: "https://172.20.147.40:5173/scheduler"
-  }}
-  >
     <CssVarsProvider theme={myTheme}>
-      <RouterProvider router={router} />
-    </CssVarsProvider>
-  </Auth0Provider>
+      <App />
+      </CssVarsProvider>
   </React.StrictMode>,
 );
