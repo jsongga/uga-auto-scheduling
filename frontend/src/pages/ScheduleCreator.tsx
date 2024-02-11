@@ -180,38 +180,78 @@ export default function ScheduleCreator() {
 
   return scheduleOptions.length > 0 ? (
     <Box p={2}>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid xs={12} md={3}>
           <Stack gap={1} alignItems={"center"}>
             <Typography level={"h3"}>All Schedules</Typography>
             <Stack direction={"row"} gap={2}>
-              <Button variant={"plain"}>Sort by Rating</Button>
-              <Button variant={"plain"}>Sort by Campus Days</Button>
-              <Button variant={"plain"}>Sort by Time on Campus</Button>
-            </Stack>
-            {scheduleOptions.map((option: Option, index: number) => (
-              <StyledOption
+              <Button
+                variant={"plain"}
                 onClick={() => {
-                  setOptionID(index);
+                  console.log("Sorting by rating");
+                  setScheduleOptions(
+                    [...scheduleOptions].sort(
+                      (a: Option, b: Option) =>
+                        b.avgProfessorRating - a.avgProfessorRating,
+                    ),
+                  );
                 }}
               >
-                <Stack
-                  direction={"row"}
-                  justifyContent={"space-between"}
-                  flexWrap="wrap"
-                  gap={1}
+                Sort by Rating
+              </Button>
+              <Button
+                variant={"plain"}
+                onClick={() => {
+                  setScheduleOptions(
+                    [...scheduleOptions].sort(
+                      (a: Option, b: Option) =>
+                        a.totalDaysOnCampus - b.totalDaysOnCampus,
+                    ),
+                  );
+                }}
+              >
+                Sort by Campus Days
+              </Button>
+              <Button
+                variant={"plain"}
+                onClick={() => {
+                  setScheduleOptions(
+                    [...scheduleOptions].sort(
+                      (a: Option, b: Option) =>
+                        a.totalTimeOnCampus - b.totalTimeOnCampus,
+                    ),
+                  );
+                }}
+              >
+                Sort by Time on Campus
+              </Button>
+            </Stack>
+            <Stack height={"50vh"} sx={{ overflow: "scroll" }}>
+              {scheduleOptions.map((option: Option, index: number) => (
+                <StyledOption
+                  onClick={() => {
+                    setOptionID(index);
+                  }}
                 >
-                  <Chip>
-                    Rating: {option.avgProfessorRating.toPrecision(2)}
-                  </Chip>
-                  <Chip>Days on Campus: {option.totalDaysOnCampus}</Chip>
-                  <Chip>
-                    Time on Campus: {Math.floor(option.totalTimeOnCampus / 60)}:
-                    {option.totalTimeOnCampus % 60}
-                  </Chip>
-                </Stack>
-              </StyledOption>
-            ))}
+                  <Stack
+                    direction={"row"}
+                    justifyContent={"space-between"}
+                    flexWrap="wrap"
+                    gap={1}
+                  >
+                    <Chip>
+                      Rating: {option.avgProfessorRating.toPrecision(2)}
+                    </Chip>
+                    <Chip>Days on Campus: {option.totalDaysOnCampus}</Chip>
+                    <Chip>
+                      Time on Campus:{" "}
+                      {Math.floor(option.totalTimeOnCampus / 60)}:
+                      {option.totalTimeOnCampus % 60}
+                    </Chip>
+                  </Stack>
+                </StyledOption>
+              ))}
+            </Stack>
           </Stack>
         </Grid>
         <Grid xs={12} md={9}>

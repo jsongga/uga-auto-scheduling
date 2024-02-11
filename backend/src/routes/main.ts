@@ -33,9 +33,8 @@ export type Choices = {
   uid: number;
 };
 
-defaultRoute.post("/scheduling", (req, res) => { 
-  
-  try { 
+defaultRoute.post("/scheduling", (req, res) => {
+  try {
     const newResult: string[][] = (req.body as Choices[]).map(
       (course: Choices) => {
         return course.options.map((option) => {
@@ -55,7 +54,7 @@ defaultRoute.post("/scheduling", (req, res) => {
 
     const schedule = createSchedule(newResult);
 
-    console.log(JSON.stringify(schedule));
+    // console.log(JSON.stringify(schedule));
 
     res.json(schedule);
 

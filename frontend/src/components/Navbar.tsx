@@ -1,5 +1,16 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Avatar, Box, Button, Stack, styled, Typography, Dropdown, MenuButton, Menu, MenuItem } from "@mui/joy";
+import {
+  Avatar,
+  Box,
+  Button,
+  Stack,
+  styled,
+  Typography,
+  Dropdown,
+  MenuButton,
+  Menu,
+  MenuItem,
+} from "@mui/joy";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
@@ -17,7 +28,11 @@ export default function Navbar() {
 
   return (
     <NavContainer>
-      <Stack direction={"row"} justifyContent={"space-between"}>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
         <Stack direction={"row"}>
           <StyledAppName level={"h3"} onClick={goToLand}>
             Scheduler
@@ -36,10 +51,17 @@ export default function Navbar() {
             </MenuButton>
             <Menu>
               <MenuItem onClick={handleAvatarClick}>Profile</MenuItem>
-              <MenuItem onClick={() => logout({ logoutParams: { returnTo: "https://172.20.147.40:5173" } })}>Logout</MenuItem>
+              <MenuItem
+                onClick={() =>
+                  logout({
+                    logoutParams: { returnTo: "https://172.20.147.40:5173" },
+                  })
+                }
+              >
+                Logout
+              </MenuItem>
             </Menu>
           </Dropdown>
-
         </Stack>
       </Stack>
     </NavContainer>
