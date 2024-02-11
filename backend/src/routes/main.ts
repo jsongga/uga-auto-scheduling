@@ -55,3 +55,5 @@ defaultRoute.post("/scheduling", (req, res) => {
 
   res.json({ message: "Got it!" });
 });
+
+createSchedule([["CSCI1302"]]);
