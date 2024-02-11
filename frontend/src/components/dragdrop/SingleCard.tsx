@@ -2,6 +2,7 @@ import Paper from "@mui/material/Paper";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import {
   Autocomplete,
+  createFilterOptions,
   IconButton,
   Stack,
   StackProps,
@@ -11,18 +12,21 @@ import {
 } from "@mui/joy";
 import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import { useEffect, useState } from "react";
+import { Schedule } from "../../pages/ScheduleCreator.tsx";
 
 const options = ["CSCI 2610", "CSCI 2620", "CSCI 2630", "CSCI 2640"];
-
+const filter = createFilterOptions<string>();
 export default function SingleCard(props: {
-  children: React.ReactNode;
+  // children: React.ReactNode;
   options: string[];
+  details: Schedule;
+  setSchedule: any;
 }) {
-  const [isImportant, setIsImportant] = useState(false);
-
-  useEffect(() => {
-    console.log(isImportant);
-  }, [isImportant]);
+  // const [isImportant, setIsImportant] = useState(false);
+  //
+  // useEffect(() => {
+  //   console.log(isImportant);
+  // }, [isImportant]);
 
   return (
     <StyledStack
@@ -31,7 +35,7 @@ export default function SingleCard(props: {
       pl={1}
       pr={1}
       alignItems={"center"}
-      special={isImportant}
+      special={props.details.mustTake}
     >
       <DragIcon />
       <StyledAutocomplete
@@ -39,11 +43,47 @@ export default function SingleCard(props: {
         multiple
         variant={"plain"}
         size={"lg"}
+        onChange={(event, value) => {
+          if (
+            (value as string[])[(value as string[]).length - 1]?.startsWith(
+              "Finish to add CRN: ",
+            )
+          ) {
+            return;
+          }
+          props.setSchedule({
+            type: "change",
+            options: value,
+            uid: props.details.uid,
+          });
+        }}
+        value={props.details.options}
+        filterOptions={(options, params) => {
+          const filtered = filter(options as string[], params);
+
+          const { inputValue } = params;
+          // Suggest the creation of a new value
+          const isExisting = (options as string[]).some(
+            (option: string) => inputValue === option,
+          );
+          const isNumber = !isNaN(Number(inputValue));
+          const length = inputValue.length;
+
+          if (inputValue !== "" && !isExisting) {
+            if (isNumber && length <= 4)
+              filtered.push(`Finish to add CRN: ${inputValue}`);
+            else if (isNumber && length === 5) {
+              filtered.push(`CRN: ${inputValue}`);
+            }
+          }
+
+          return filtered;
+        }}
         // startDecorator={<DragIndicatorIcon />}
       />
-      <Tooltip title={"Whether the course is a must-take"}>
+      <Tooltip title={"Whether the course is a must-take"} enterDelay={500}>
         <StyledIconButton
-          aria-pressed={isImportant ? "true" : "false"}
+          aria-pressed={props.details.mustTake ? "true" : "false"}
           sx={(theme) => ({
             [`&[aria-pressed="true"]`]: {
               ...theme.variants.outlinedActive.neutral,
@@ -52,7 +92,10 @@ export default function SingleCard(props: {
             },
           })}
           onClick={() => {
-            setIsImportant(!isImportant);
+            props.setSchedule({
+              uid: props.details.uid,
+              type: "toggle",
+            });
           }}
         >
           <GppMaybeIcon />
