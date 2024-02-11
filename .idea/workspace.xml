@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Reset global vars">
+    <list default="true" id="0bbe4eff-4d78-4c1d-91dd-ad663e5e6cfc" name="Changes" comment="Updated calendar view">
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/Build.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/Build.tsx" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/Landing.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/Landing.tsx" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/main.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/backend/src/routes/main.ts" afterDir="false" />
+      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/Navbar.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/components/Navbar.tsx" afterDir="false" />
       <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/pages/ScheduleCreator.tsx" afterDir="false" />
-      <change beforePath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/utils.ts" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/uga-auto-scheduling/frontend/src/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="56001" />
+    <option name="totalTimeSeconds" value="57038" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -128,7 +127,7 @@
       <updated>1707523782440</updated>
       <workItem from="1707523783662" duration="8426000" />
       <workItem from="1707540081200" duration="37612000" />
-      <workItem from="1707622756192" duration="16220000" />
+      <workItem from="1707622756192" duration="17483000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Project Setup">
       <option name="closed" value="true" />
@@ -266,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707632833153</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Updated calendar view">
+      <option name="closed" value="true" />
+      <created>1707639451298</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1707639451298</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +308,7 @@
     <MESSAGE value="auto test createSchedule function" />
     <MESSAGE value="algorithms" />
     <MESSAGE value="Reset global vars" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reset global vars" />
+    <MESSAGE value="Updated calendar view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated calendar view" />
   </component>
 </project>
