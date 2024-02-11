@@ -33,27 +33,36 @@ export type Choices = {
   uid: number;
 };
 
-defaultRoute.post("/scheduling", (req, res) => {
-  const newResult: string[][] = (req.body as Choices[]).map(
-    (course: Choices) => {
-      return course.options.map((option) => {
-        if (option.startsWith("CRN:")) return option;
-        else
-          return (
-            option.substring(0, option.indexOf(" ")) +
-            option.substring(option.indexOf(" ") + 1, option.length)
-          );
-      });
-    },
-  );
+defaultRoute.post("/scheduling", (req, res) => { 
+  
+  try { 
+    const newResult: string[][] = (req.body as Choices[]).map(
+      (course: Choices) => {
+        return course.options.map((option) => {
+          if (option.startsWith("CRN:")) return option;
+          else
+            return (
+              option.substring(0, option.indexOf(" ")) +
+              option.substring(option.indexOf(" ") + 1, option.length)
+            );
+        });
+      },
+    );
 
-  // console.log(JSON.stringify(newResult));
+    console.log("JSON.stringify(newResult)");
 
-  const schedule = createSchedule(newResult);
+    // console.log(JSON.stringify(newResult));
 
-  // console.log(JSON.stringify(schedule));
+    const schedule = createSchedule(newResult);
 
-  res.json(schedule);
+    console.log(JSON.stringify(schedule));
+
+    res.json({"hello": "world"});
+
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Internal server error");
+  }
 });
 
 // createSchedule([["CSCI1302"]]);
