@@ -8,10 +8,14 @@ import Signup from "./pages/Signup.tsx";
 import RootTemplate from "./pages/RootTemplate.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Login from "./pages/Login.tsx";
+import Logout from "./pages/Logout.tsx";
+import Profile from "./pages/Profile.tsx";
 import ScheduleCreator from "./pages/ScheduleCreator.tsx";
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 // You can put this to any file that's included in your tsconfig
 import type { PaletteRange } from "@mui/joy/styles";
+
+
 
 declare module "@mui/joy/styles" {
   interface ColorPalettePropOverrides {
@@ -48,6 +52,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
   {
     path: "/",
@@ -152,20 +164,16 @@ const myTheme = extendTheme({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-
+  <Auth0Provider
+  domain={domain}
+  clientId={clientId}
+  authorizationParams={{
+    redirect_uri: "https://172.20.147.40:5173/scheduler"
+  }}
+  >
     <CssVarsProvider theme={myTheme}>
       <RouterProvider router={router} />
     </CssVarsProvider>
+  </Auth0Provider>
   </React.StrictMode>,
 );
-
-<Auth0Provider
-domain={domain}
-clientId={clientId}
-authorizationParams={{
-  redirect_uri: window.location.origin
-}}
->
-{/*<Landing />*/}
-<RouterProvider router={router} />
-</Auth0Provider>
