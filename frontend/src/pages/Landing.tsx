@@ -33,6 +33,18 @@ export default function Landing() {
       loginWithRedirect();
     }
   }
+
+  const onSignUpClick = () => {
+    if (isAuthenticated) {
+      navigate("/scheduler");
+    } else {
+      loginWithRedirect({
+        authorizationParams: {
+          screen_hint: "signup"
+        }
+      });
+    }
+  }
   
   return (
     <Box>
@@ -60,7 +72,7 @@ export default function Landing() {
                     <MainButton
                       variant={"solid"}
                       size={"lg"}
-                      onClick={goToSignup}
+                      onClick={onSignUpClick}
                     >
                       Sign-up
                     </MainButton>
