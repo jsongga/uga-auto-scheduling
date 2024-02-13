@@ -1,7 +1,7 @@
 import { Router } from "express";
 import fs from "fs";
 import path from "path";
-import { createSchedule } from "../scripts/algorithm.js";
+import { createSchedule } from "../scripts/algorithm";
 
 export const defaultRoute = Router();
 
@@ -48,7 +48,7 @@ defaultRoute.post("/scheduling", (req, res) => {
       },
     );
 
-    console.log("JSON.stringify(newResult)");
+    // console.log("JSON.stringify(newResult)");
 
     // console.log(JSON.stringify(newResult));
 
@@ -57,11 +57,10 @@ defaultRoute.post("/scheduling", (req, res) => {
     // console.log(JSON.stringify(schedule));
 
     res.json(schedule);
-
   } catch (e) {
     console.error(e);
     res.status(500).send("Internal server error");
   }
 });
 
-// createSchedule([["CSCI1302"]]);
+// createSchedule([["CSCI1302"], ["CSCI1301"], ["CRN: 27667"]]);

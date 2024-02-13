@@ -6,7 +6,7 @@ import {
   getClass,
   Professor,
   Class,
-} from "./src/scripts/algorithm.js";
+} from "./src/scripts/algorithm";
 const cors = require("cors");
 
 const app = express();
