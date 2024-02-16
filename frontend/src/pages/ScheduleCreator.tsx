@@ -269,11 +269,12 @@ export default function ScheduleCreator() {
                     title: `${course.courseName} (${course.courseNumber})`,
                     start: starts[i],
                     end: ends[i],
+                    allDay: starts[i].split("T")[1].startsWith("00:01") ? true : false,
                     extendedProps: {
                       description:
                         course.professor.firstName +
                         " " +
-                        course.professor.lastName,
+                        course.professor.lastName + " " + "(" + course.professor.rating + ")",
                       description2: course.location[i],
                       description3: course.rooms[i],
                       // description4: course.description,
