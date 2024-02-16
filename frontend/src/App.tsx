@@ -14,10 +14,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <AllTemplate />,
     children: [
-    {
-      path: "/build",
-      element: <Build />,
-    },
+    // {
+    //   path: "/build",
+    //   element: <Build />,
+    // },
     {
       path: "/",
       element: <Landing />,

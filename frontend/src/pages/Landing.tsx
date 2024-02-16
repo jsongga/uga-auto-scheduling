@@ -153,6 +153,7 @@ const StyledInfo = styled(Card)`
 const StyledSheet1 = styled(Box)`
   background-color: #ecebe9;
   overflow: visible;
+  min-height: 100vh;
 `;
 
 const StyledSheet2 = styled(StyledSheet1)`

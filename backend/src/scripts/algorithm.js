@@ -54,7 +54,7 @@ export function findProfessor(professor) {
 			curObj.avgRating
 		);
 	}
-	return new Professor("Unknown", "Unknown", 0);
+	return new Professor("Unknown", "Unknown", 2.5);
 }
 
 export function getClass(crn) {

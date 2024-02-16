@@ -20,8 +20,8 @@ const Profile = () => {
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", flexDirection: "column"}}>
       <Card variant="soft" sx={{ width: 320, marginBottom: 2}}>
         <CardContent>
-        <Typography level="title-lg">{user.name}</Typography>
-        <Typography level="body-sm">{user.email}</Typography>
+        <Typography level="title-lg">{user?.name}</Typography>
+        <Typography level="body-sm">{user?.email}</Typography>
         <AspectRatio minHeight={"120px"} maxHeight={"200px"}>
           <img src={user?.picture} alt="L" />
         </AspectRatio>
