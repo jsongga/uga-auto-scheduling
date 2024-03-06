@@ -15,11 +15,9 @@ wants to take during a semester, Scheduler fetches every possible combination of
 nicely filters it onto a responsive weekly calendar view.
 
 ![image](https://github.com/jsongga/uga-auto-scheduling/assets/128270303/ebf3d832-71be-4467-b9ec-a4bb4abc40a5)
-![image](https://github.com/jsongga/uga-auto-scheduling/assets/128270303/10ce17e7-bc85-45f9-bfae-a4e2fa47e4f4)
-![image](https://github.com/jsongga/uga-auto-scheduling/assets/128270303/0a1a61b3-e7e3-4ae0-be92-9225e40dba6d)
-![image](https://github.com/jsongga/uga-auto-scheduling/assets/128270303/346a5b97-b8e2-47d4-acc6-61274ccb9d96)
-
-
+![image](https://github.com/jsongga/uga-auto-scheduling/assets/128270303/9a711c59-364f-4fbb-87d6-731604501be9)
+![image](https://github.com/jsongga/uga-auto-scheduling/assets/128270303/7deb1009-2b71-4e85-9a64-b2ee0f800470)
+![image](https://github.com/jsongga/uga-auto-scheduling/assets/128270303/a4567205-db76-4e38-b178-121e77809024)
 
 
 
